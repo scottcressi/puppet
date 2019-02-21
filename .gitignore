@@ -2,3 +2,11 @@ modules_forge
 r10k_cache
 puppet
 puppetdb
+volumes/
+code/
+puppetdb/
+puppetdb-postgres/
+serverdata/
+Gemfile.lock
+.bundle/
+.ruby-version
