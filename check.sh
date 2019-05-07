@@ -15,5 +15,5 @@ else
 fi
 
 docker run -w /var/tmp -v $REPO:/var/tmp puppet/r10k puppetfile check
-docker run -w /var/tmp -v $REPO:/var/tmp puppet/r10k puppetfile install --color --verbose info --force
+docker run -w /var/tmp -v $REPO:/var/tmp puppet/r10k puppetfile install --color --verbose notice --force
 docker run -v $REPO:/var/tmp puppet/puppet-agent module list --modulepath /var/tmp/modules_forge --tree
