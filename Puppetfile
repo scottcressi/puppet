@@ -6,7 +6,7 @@ mod        'augeas',                :git  =>  'https://github.com/camptocamp/pup
 mod        'certs',                 :git  =>  'https://github.com/broadinstitute/puppet-certs/',              :ref  =>  '1.0.0'
 mod        'cobbler',               :git  =>  'https://github.com/spacedog/puppet-cobbler',                   :ref  =>  '6c2e17f283fe18cbfc82c9a535b22bee21e91908'
 mod        'command_args',          :git  =>  'https://github.com/pcfens/puppet-command_args',                :ref  =>  'v0.2.0'
-mod        'concat',                :git  =>  'https://github.com/puppetlabs/puppetlabs-concat',              :ref  =>  '5.3.0'
+mod        'concat',                :git  =>  'https://github.com/puppetlabs/puppetlabs-concat',              :ref  =>  '1.2.5'
 mod        'consul',                :git  =>  'https://github.com/solarkennedy/puppet-consul',                :ref  =>  'v5.0.3'
 mod        'consul_template',       :git  =>  'https://github.com/BashtonLtd/puppet-consul_template',         :ref  =>  '98523042b733a310ab9e6733cc04f19387e6848c'
 mod        'cron',                  :git  =>  'https://github.com/roman-mueller/rmueller-cron',               :ref  =>  'v0.2.0'
