@@ -3,7 +3,7 @@ version: '3'
 services:
   puppet:
     hostname: puppet
-    image: puppet/puppetserver
+    image: puppet/puppetserver:6.3.0
     ports:
       - 8140:8140
     environment:
@@ -11,17 +11,18 @@ services:
       # and must list all the names under which the puppetserver can be
       # reached. 'puppet' must be one of them, otherwise puppetdb won't be
       # able to get a cert. Add other names as a comma-separated list
-      - DNS_ALT_NAMES=puppet,${DNS_ALT_NAMES:-}
+      - DNS_ALT_NAMES=puppet-$VPC.example.com,${DNS_ALT_NAMES:-}
       - PUPPETDB_SERVER_URLS=https://puppetdb:8081
+      - PUPPERWARE_DISABLE_ANALYTICS=true
     volumes:
-      - ./volumes/code:/etc/puppetlabs/code/
-      - ./volumes/puppet:/etc/puppetlabs/puppet/
-      - ./volumes/serverdata:/opt/puppetlabs/server/data/puppetserver/
-      - ./volumes/hieradata:/etc/hieradata/
+      - /etc/puppet/puppet/docker/volumes/code:/etc/puppetlabs/code/
+      - /etc/puppet/puppet/:/etc/puppetlabs/puppet/
+      - /etc/puppet/puppet/docker/volumes/serverdata:/opt/puppetlabs/server/data/puppetserver/
+      - /etc/hieradata:/etc/hieradata/
 
   postgres:
     environment:
-      - POSTGRES_PASSWORD=puppetdb
+      - POSTGRES_PASSWORD=${PUPPETDB_PASSWORD}
       - POSTGRES_USER=puppetdb
       - POSTGRES_DB=puppetdb
     expose:
@@ -33,9 +34,9 @@ services:
 
   puppetdb:
     hostname: puppetdb
-    image: puppet/puppetdb
+    image: puppet/puppetdb:6.3.0
     environment:
-      - PUPPETDB_PASSWORD=puppetdb
+      - PUPPETDB_PASSWORD=${PUPPETDB_PASSWORD}
       - PUPPETDB_USER=puppetdb
     ports:
       - 8080:8080
@@ -44,18 +45,33 @@ services:
       - postgres
       - puppet
     volumes:
-      - ./volumes/puppetdb/ssl:/etc/puppetlabs/puppet/ssl/
+      - /etc/puppet/puppet/docker/volumes/puppetdb/ssl:/etc/puppetlabs/puppet/ssl/
 
   puppetboard:
-    image: puppet/puppetboard
+    image: puppet/puppetboard:0.3.0
     ports:
       - 8000:8000
 
   puppetexplorer:
-    image: puppet/puppetexplorer
+    image: puppet/puppetexplorer:2.0.0
     ports:
       - 80:80
   #read_only: true
+
+  r10k:
+    image: puppet/r10k:3.2.0
+    entrypoint:
+      - r10k
+      - deploy
+      - environment
+      - -p
+      - --verbose
+      - -c
+      - /opt/puppet/puppet/r10k.yaml
+    volumes:
+      - /root/.ssh:/root/.ssh
+      - /etc/puppet:/opt/puppet
+      - /etc/puppet/puppet/docker/volumes/code:/etc/puppet/
 
 networks:
   default:
