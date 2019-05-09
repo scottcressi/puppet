@@ -1,0 +1,1 @@
+docker run -v /root/repos/puppet:/var/tmp puppet/puppet-agent apply --noop --modulepath /var/tmp/modules:/var/tmp/modules_forge  /var/tmp/manifests/site.pp -e 'exec { "sleep": path => "/bin", command => "sleep 5000" }'
