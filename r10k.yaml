@@ -1,1 +1,5 @@
-:cachedir: 'r10k_cache'
+:cachedir: 'docker/r10k_cache'
+sources:
+  repositories:
+    remote: 'git@github.com:scottcressi/puppet'
+    basedir: '/var/tmp/docker/volumes/code'

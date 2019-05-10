@@ -11,14 +11,14 @@ services:
       # and must list all the names under which the puppetserver can be
       # reached. 'puppet' must be one of them, otherwise puppetdb won't be
       # able to get a cert. Add other names as a comma-separated list
-      - DNS_ALT_NAMES=puppet-$VPC.example.com,${DNS_ALT_NAMES:-}
+      - DNS_ALT_NAMES=${DNS_ALT_NAMES:-}
       - PUPPETDB_SERVER_URLS=https://puppetdb:8081
       - PUPPERWARE_DISABLE_ANALYTICS=true
     volumes:
-      - /etc/puppet/puppet/docker/volumes/code:/etc/puppetlabs/code/
-      - /etc/puppet/puppet/:/etc/puppetlabs/puppet/
-      - /etc/puppet/puppet/docker/volumes/serverdata:/opt/puppetlabs/server/data/puppetserver/
-      - /etc/hieradata:/etc/hieradata/
+      - ./volumes/code/:/etc/puppetlabs/code/environments/
+      - ./volumes/code/master/:/etc/puppetlabs/puppet/
+      - ./volumes/serverdata:/opt/puppetlabs/server/data/puppetserver/
+      - ../../hieradata:/etc/hieradata/
 
   postgres:
     environment:
@@ -45,7 +45,7 @@ services:
       - postgres
       - puppet
     volumes:
-      - /etc/puppet/puppet/docker/volumes/puppetdb/ssl:/etc/puppetlabs/puppet/ssl/
+      - ./volumes/puppetdb/ssl:/etc/puppetlabs/puppet/ssl/
 
   puppetboard:
     image: puppet/puppetboard:0.3.0
