@@ -1,6 +1,4 @@
-REPO=$1
-
-[ -z "$REPO" ] && echo "please set path to puppet repo" && exit 1;
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 if [ -x "$(command -v docker)" ]; then
   echo "Docker is installed"
@@ -14,6 +12,6 @@ else
   echo "Please start Docker"
 fi
 
-docker run -w /var/tmp -v $REPO:/var/tmp puppet/r10k puppetfile check
-docker run -w /var/tmp -v $REPO:/var/tmp puppet/r10k puppetfile install --color --verbose notice --force
-docker run -v $REPO:/var/tmp puppet/puppet-agent module list --modulepath /var/tmp/modules_forge --tree
+docker run -w /var/tmp -v $DIR:/var/tmp puppet/r10k puppetfile check
+docker run -w /var/tmp -v $DIR:/var/tmp puppet/r10k puppetfile install --color --verbose notice --force
+docker run -v $DIR:/var/tmp puppet/puppet-agent module list --modulepath /var/tmp/modules_forge --tree
