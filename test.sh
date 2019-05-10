@@ -1,1 +1,3 @@
-docker run -v /root/repos/puppet:/var/tmp puppet/puppet-agent apply --noop --modulepath /var/tmp/modules:/var/tmp/modules_forge  /var/tmp/manifests/site.pp -e 'exec { "sleep": path => "/bin", command => "sleep 5000" }'
+find /etc/puppet/puppet/ssl/ -type f | grep -i `hostname` | xargs sudo rm -f
+docker run -e FACTER_virtual=kvm --net host puppet/puppet-agent agent --server puppet --verbose --no-daemonize --summarize --noop \
+--environment=production
