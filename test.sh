@@ -11,5 +11,4 @@ agent \
 --verbose \
 --no-daemonize \
 --summarize \
---noop \
 --environment=production

@@ -21,6 +21,7 @@ services:
       - ${VOLUME_ROOT:-.}/volumes/code:/etc/puppetlabs/code/
       - ${VOLUME_ROOT:-.}/volumes/puppet:/etc/puppetlabs/puppet/
       - ${VOLUME_ROOT:-.}/volumes/serverdata:/opt/puppetlabs/server/data/puppetserver/
+      - ../../hieradata:/etc/hieradata/
     dns_search: ${DOMAIN:-internal}
     networks:
       default:
