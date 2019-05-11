@@ -3,7 +3,6 @@ find docker/volumes/puppet/ssl/ca/signed -type f | grep -i `hostname` | xargs su
 
 # run test
 docker run \
--e FACTER_virtual=docker \
 --net host \
 --name=c7 \
 --privileged \
@@ -14,4 +13,4 @@ diamanti/c7-systemd-dbus:latest
 
 docker exec -ti c7 /bin/bash -c "yum install -y https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm"
 docker exec -ti c7 /bin/bash -c "yum install -y puppet-agent-6.4.2"
-docker exec -ti c7 /bin/bash -c "/opt/puppetlabs/bin/puppet agent --verbose --no-daemonize --summarize --environment=production --server puppet"
+docker exec -e FACTER_virtual=kvm -ti c7 /bin/bash -c "/opt/puppetlabs/bin/puppet agent --verbose --no-daemonize --summarize --environment=production --server puppet"
