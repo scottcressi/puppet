@@ -3,7 +3,7 @@ find docker/volumes/puppet/ssl/ca/signed -type f | grep -i `hostname` | xargs su
 
 # run test
 docker run \
--e FACTER_virtual=kvm \
+-e FACTER_virtual=docker \
 --net host \
 --name=c7 \
 --privileged \
