@@ -7,4 +7,4 @@ docker run \
 --net host \
 centos/systemd \
 /bin/bash \
--c "yum install -y https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm && yum install -y puppet-agent-6.4.2 && /opt/puppetlabs/bin/puppet agent -t --verbose --no-daemonize --summarize --environment=production --server puppet"
+-c "yum install -y https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm && yum install -y puppet-agent-6.4.2 && /opt/puppetlabs/bin/puppet agent --verbose --no-daemonize --summarize --environment=production --server puppet"
