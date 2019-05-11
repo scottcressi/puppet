@@ -73,9 +73,3 @@ services:
     image: puppet/puppetboard:0.3.0
     ports:
       - 8000:8000
-
-  puppetexplorer:
-    image: puppet/puppetexplorer:2.0.0
-    ports:
-      - 80:80
-  #read_only: true
