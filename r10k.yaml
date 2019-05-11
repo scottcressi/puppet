@@ -2,4 +2,4 @@
 sources:
   repositories:
     remote: 'git@github.com:scottcressi/puppet'
-    basedir: '/var/tmp/docker/volumes/code'
+    basedir: '/var/tmp/docker/volumes/code/environments'
