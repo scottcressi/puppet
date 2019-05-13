@@ -35,7 +35,7 @@ mod        'selinux',               :git  =>  'https://github.com/voxpupuli/pupp
 mod        'ssh',                   :git  =>  'https://github.com/saz/puppet-ssh',                            :ref  =>  'v5.0.0'
 mod        'sssd',                  :git  =>  'https://github.com/sgnl05/sgnl05-sssd/',                       :ref  =>  '2.13.1'
 mod        'stdlib',                :git  =>  'https://github.com/puppetlabs/puppetlabs-stdlib',              :ref  =>  '4.25.1'
-mod        'sudo',                  :git  =>  'https://github.com/saz/puppet-sudo',                           :ref  =>  'v4.1.0'
+mod        'sudo',                  :git  =>  'https://github.com/saz/puppet-sudo',                           :ref  =>  'v6.0.0'
 mod        'systemd',               :git  =>  'https://github.com/camptocamp/puppet-systemd',                 :ref  =>  '2.4.0'
 mod        'translate',             :git  =>  'https://github.com/puppetlabs/puppetlabs-translate',           :ref  =>  '1.2.0'
 mod        'vault',                 :git  =>  'https://github.com/jsok/puppet-vault',                         :ref  =>  'v2.0.0'
