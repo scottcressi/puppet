@@ -15,7 +15,7 @@ services:
       # reached. 'puppet.${DOMAIN:-internal}' must be one of them, otherwise puppetdb won't be
       # able to get a cert. Add other names as a comma-separated list
       - DNS_ALT_NAMES=puppet,puppet.${DOMAIN:-internal},${DNS_ALT_NAMES:-}
-      - PUPPERWARE_ANALYTICS_ENABLED=${PUPPERWARE_ANALYTICS_ENABLED:-true}
+      - PUPPERWARE_ANALYTICS_ENABLED=${PUPPERWARE_ANALYTICS_ENABLED:-false}
       - PUPPETDB_SERVER_URLS=https://puppetdb.${DOMAIN:-internal}:8081
     volumes:
       - ${VOLUME_ROOT:-.}/volumes/code:/etc/puppetlabs/code/
@@ -49,7 +49,7 @@ services:
     hostname: puppetdb.${DOMAIN:-internal}
     image: puppet/puppetdb:6.3.2
     environment:
-      - PUPPERWARE_ANALYTICS_ENABLED=${PUPPERWARE_ANALYTICS_ENABLED:-true}
+      - PUPPERWARE_ANALYTICS_ENABLED=${PUPPERWARE_ANALYTICS_ENABLED:-false}
       # This name is an FQDN so the short name puppet doesn't collide outside compose network
       - PUPPETSERVER_HOSTNAME=puppet.${DOMAIN:-internal}
       - PUPPETDB_POSTGRES_HOSTNAME=postgres.${DOMAIN:-internal}
@@ -73,7 +73,7 @@ services:
     image: puppet/puppetboard:0.3.0
     ports:
       - 8000:8000
-      
+
   webserver:
     image: python:2
     entrypoint:
