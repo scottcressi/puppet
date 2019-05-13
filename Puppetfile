@@ -13,7 +13,7 @@ mod        'docker',                :git  =>  'https://github.com/puppetlabs/pup
 mod        'epel',                  :git  =>  'https://github.com/stahnma/puppet-module-epel',                :ref  =>  '1.3.1'
 mod        'file_capability',       :git  =>  'https://github.com/smoeding/puppet-file_capability',           :ref  =>  'v1.1.0'
 mod        'filebeat',              :git  =>  'https://github.com/pcfens/puppet-filebeat',                    :ref  =>  'v3.4.0'
-mod        'firewall',              :git  =>  'https://github.com/puppetlabs/puppetlabs-firewall',            :ref  =>  '1.8.1'
+mod        'firewall',              :git  =>  'https://github.com/puppetlabs/puppetlabs-firewall',            :ref  =>  '1.15.3'
 mod        'gpasswd',               :git  =>  'https://github.com/deric/puppet-gpasswd',                      :ref  =>  'v0.3.2'
 mod        'inifile',               :git  =>  'https://github.com/puppetlabs/puppetlabs-inifile',             :ref  =>  '2.5.0'
 mod        'ipaclient',             :git  =>  'https://github.com/joshuabaird/puppet-ipaclient',              :ref  =>  '2.5.0'
