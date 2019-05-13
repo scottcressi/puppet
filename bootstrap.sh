@@ -1,6 +1,4 @@
 # this script assumes the following:
-# git is installed
-# docker is installed
 # ssh key exists in root
 # puppet repo lives side by side hiera repo, but can live anywhere on the os
 
@@ -25,8 +23,11 @@ else
   sudo systemctl start docker
 fi
 
-cd $DIR/../hieradata
-git pull
+if command -v git ; then
+  echo git is installed
+else
+  echo Please install git
+fi
 
 cd $DIR
 bash r10k.sh
