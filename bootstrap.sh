@@ -1,7 +1,3 @@
-# this script assumes the following:
-# ssh key exists in root
-# puppet repo lives side by side hiera repo, but can live anywhere on the os
-
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 if command -v docker-compose ; then
@@ -15,6 +11,7 @@ if command -v docker ; then
   echo Docker is installed
 else
   echo Please install Docker
+  exit 0
 fi
 
 if [ `sudo systemctl is-active docker` == "active" ]; then
@@ -27,6 +24,17 @@ if command -v git ; then
   echo git is installed
 else
   echo Please install git
+  exit 0
+fi
+
+if [ ! -d "../hieradata" ] ; then
+  echo please clone hieradata next to puppet repo
+  exit 0
+fi
+
+if [ ! -f "`eval echo ~/.ssh/id_rsa`" ] ; then
+  echo please install puppet ssh key
+  exit 0
 fi
 
 cd $DIR
