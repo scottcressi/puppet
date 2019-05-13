@@ -27,7 +27,7 @@ mod        'ntp',                   :git  =>  'https://github.com/puppetlabs/pup
 mod        'ossec',                 :git  =>  'https://github.com/wazuh/ossec-puppet',                        :ref  =>  '2.0.21'
 mod        'postfix',               :git  =>  'https://github.com/camptocamp/puppet-postfix',                 :ref  =>  '1.8.0'
 mod        'powershell',            :git  =>  'https://github.com/puppetlabs/puppetlabs-powershell',          :ref  =>  '2.3.0'
-mod        'puppet_agent',          :git  =>  'https://github.com/puppetlabs/puppetlabs-puppet_agent',        :ref  =>  '2.1.1'
+mod        'puppet_agent',          :git  =>  'https://github.com/puppetlabs/puppetlabs-puppet_agent',        :ref  =>  '2.1.2'
 mod        'reboot',                :git  =>  'https://github.com/puppetlabs/puppetlabs-reboot',              :ref  =>  '2.1.2'
 mod        'registry',              :git  =>  'https://github.com/puppetlabs/puppetlabs-registry',            :ref  =>  '1.1.3'
 mod        'resource_tree',         :git  =>  'https://github.com/jake-dog/puppet-resource_tree/',            :ref  =>  '1.1.0'
