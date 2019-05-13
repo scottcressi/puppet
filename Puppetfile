@@ -31,7 +31,7 @@ mod        'puppet_agent',          :git  =>  'https://github.com/puppetlabs/pup
 mod        'reboot',                :git  =>  'https://github.com/puppetlabs/puppetlabs-reboot',              :ref  =>  '2.1.2'
 mod        'registry',              :git  =>  'https://github.com/puppetlabs/puppetlabs-registry',            :ref  =>  '1.1.3'
 mod        'resource_tree',         :git  =>  'https://github.com/jake-dog/puppet-resource_tree/',            :ref  =>  '1.1.0'
-mod        'selinux',               :git  =>  'https://github.com/voxpupuli/puppet-selinux',                  :ref  =>  'v1.6.0'
+mod        'selinux',               :git  =>  'https://github.com/voxpupuli/puppet-selinux',                  :ref  =>  '19f053240e7d41dc237f958eabfaac9bd5602d1f'
 mod        'ssh',                   :git  =>  'https://github.com/saz/puppet-ssh',                            :ref  =>  'v5.0.0'
 mod        'sssd',                  :git  =>  'https://github.com/sgnl05/sgnl05-sssd/',                       :ref  =>  '2.13.1'
 mod        'stdlib',                :git  =>  'https://github.com/puppetlabs/puppetlabs-stdlib',              :ref  =>  '4.25.1'
