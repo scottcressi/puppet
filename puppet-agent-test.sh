@@ -15,4 +15,10 @@ centos/systemd
 
 docker exec -ti $NAME /bin/bash -c "yum install -y https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm"
 docker exec -ti $NAME /bin/bash -c "yum install -y puppet-agent-6.4.2"
+docker exec -ti $NAME /bin/bash -c "
+echo '
+SELINUX=enforcing
+SELINUXTYPE=targeted
+' > /etc/selinux/config
+"
 docker exec -e FACTER_virtual=kvm -ti $NAME /bin/bash -c "/opt/puppetlabs/bin/puppet agent --verbose --no-daemonize --summarize --environment=production --server puppet"
