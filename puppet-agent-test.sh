@@ -21,4 +21,4 @@ SELINUX=enforcing
 SELINUXTYPE=targeted
 ' > /etc/selinux/config
 "
-docker exec -e FACTER_virtual=kvm -ti $NAME /bin/bash -c "/opt/puppetlabs/bin/puppet agent --verbose --no-daemonize --summarize --environment=production --server puppet"
+docker exec -e FACTER_virtual=kvm -ti $NAME /bin/bash -c "/opt/puppetlabs/bin/puppet agent --test --verbose --no-daemonize --summarize --environment=production --server puppet"
