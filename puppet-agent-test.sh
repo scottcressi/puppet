@@ -9,9 +9,9 @@ docker run \
 --name=$NAME \
 --privileged \
 -d \
--v /usr/bin/docker:/usr/bin/docker \
--v /var/run/docker.sock:/run/docker.sock \
-diamanti/c7-systemd-dbus:latest
+-v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+centos/systemd
+
 
 docker exec -ti $NAME /bin/bash -c "yum install -y https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm"
 docker exec -ti $NAME /bin/bash -c "yum install -y puppet-agent-6.4.2"
