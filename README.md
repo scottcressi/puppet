@@ -12,3 +12,11 @@ docker-compose up puppet
 ```
 bash puppet-agent-test.sh
 ```
+4. check puppetfile validity
+```
+bash check-puppetfile.sh
+```
+5. deploy r10k to puppet server
+```
+bash bash r10k.sh
+```
