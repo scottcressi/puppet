@@ -1,10 +1,13 @@
 ---
 :backends:
-  - yaml
+  - eyaml
 
 :hierarchy:
   - role/%{::role}
   - common
 
-:yaml:
-  :datadir: /etc/hieradata
+:eyaml:
+  :datadir: /etc/hieradata/
+  :pkcs7_private_key: /etc/puppetlabs/puppet/puppet_eyaml/private_key.pkcs7.pem
+  :pkcs7_public_key:  /etc/puppetlabs/puppet/puppet_eyaml/public_key.pkcs7.pem
+  :extension: 'yaml'
