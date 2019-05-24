@@ -1,4 +1,7 @@
-set -x
+if [ "`docker images | awk '{print $1}' | grep centos/systemd-puppet`" != "centos/systemd-puppet" ] ; then
+echo please build puppet image
+exit 1
+fi
 
 # clean ssl
 find docker/volumes/puppet/ssl/ca/signed -type f | grep -v puppet.internal.pem | sudo xargs rm -f
