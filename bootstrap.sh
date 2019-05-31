@@ -17,7 +17,7 @@ fi
 if [ `sudo systemctl is-active docker` == "active" ]; then
   echo Docker is Running
 else
-  sudo systemctl start docker
+  echo Please start docker
 fi
 
 if command -v git ; then
