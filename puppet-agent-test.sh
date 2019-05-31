@@ -19,7 +19,7 @@ done
 
 destroy(){
 for i in `docker ps | grep centos/systemd-puppet | awk '{print $1}'` ; do
-docker stop $i
+docker kill $i
 done
 }
 
