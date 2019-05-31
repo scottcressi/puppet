@@ -1,6 +1,5 @@
 if [ "`docker images | awk '{print $1}' | grep centos/systemd-puppet`" != "centos/systemd-puppet" ] ; then
 docker build --tag centos/systemd-puppet -f docker/build/Dockerfile .
-exit 1
 fi
 
 if [ -z $1 ] ; then echo enter test/destroy ; fi
