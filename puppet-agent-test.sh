@@ -1,5 +1,5 @@
 if [ "`docker images | awk '{print $1}' | grep centos/systemd-puppet`" != "centos/systemd-puppet" ] ; then
-echo please build puppet image
+docker build --tag centos/systemd-puppet -f docker/build/Dockerfile .
 exit 1
 fi
 
