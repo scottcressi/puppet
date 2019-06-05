@@ -49,7 +49,7 @@ services:
     hostname: puppetdb.${DOMAIN:-internal}
     image: puppet/puppetdb:6.3.2
     environment:
-      - PUPPERWARE_ANALYTICS_ENABLED=${PUPPERWARE_ANALYTICS_ENABLED:-false}
+      - PUPPERWARE_ANALYTICS_ENABLED=${PUPPERWARE_ANALYTICS_ENABLED:-true}
       # This name is an FQDN so the short name puppet doesn't collide outside compose network
       - PUPPETSERVER_HOSTNAME=puppet.${DOMAIN:-internal}
       - PUPPETDB_POSTGRES_HOSTNAME=postgres.${DOMAIN:-internal}
