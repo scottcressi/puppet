@@ -41,4 +41,7 @@ cd $DIR
 bash r10k.sh
 
 cd $DIR/docker
-DNS_ALT_NAMES=foo docker-compose up -d
+
+export DNS_ALT_NAMES=foo
+export PUPPERWARE_ANALYTICS_ENABLED=false
+docker-compose up -d

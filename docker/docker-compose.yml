@@ -15,7 +15,7 @@ services:
       # reached. 'puppet.${DOMAIN:-internal}' must be one of them, otherwise puppetdb won't be
       # able to get a cert. Add other names as a comma-separated list
       - DNS_ALT_NAMES=puppet,puppet.${DOMAIN:-internal},${DNS_ALT_NAMES:-}
-      - PUPPERWARE_ANALYTICS_ENABLED=${PUPPERWARE_ANALYTICS_ENABLED:-false}
+      - PUPPERWARE_ANALYTICS_ENABLED=${PUPPERWARE_ANALYTICS_ENABLED:-true}
       - PUPPETDB_SERVER_URLS=https://puppetdb.${DOMAIN:-internal}:8081
     volumes:
       - ${VOLUME_ROOT:-.}/volumes/code:/etc/puppetlabs/code/
@@ -35,7 +35,7 @@ services:
       - POSTGRES_USER=puppetdb
       - POSTGRES_DB=puppetdb
     ports:
-      - 5432
+      - 5432:5432
     volumes:
       - ${VOLUME_ROOT:-.}/volumes/puppetdb-postgres/data:/var/lib/postgresql/data
       - ./postgres-custom:/docker-entrypoint-initdb.d
