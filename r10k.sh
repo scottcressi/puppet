@@ -6,6 +6,5 @@ docker run \
 puppet/r10k \
 deploy \
 environment \
-`git rev-parse --abbrev-ref HEAD` \
 -c r10k.yaml \
 --verbose
