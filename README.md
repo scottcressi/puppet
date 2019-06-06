@@ -1,4 +1,4 @@
-1. run puppet server / puppetdb / puppetboard
+1. run bootstrap
 ```
 bash bootstrap.sh
 ```

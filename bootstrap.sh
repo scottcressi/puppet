@@ -32,6 +32,11 @@ if [ ! -d "../hieradata" ] ; then
   exit 0
 fi
 
+if [ ! -d "../pupperware" ] ; then
+  echo please clone pupperware next to puppet repo
+  exit 0
+fi
+
 if [ ! -f "`eval echo ~/.ssh/id_rsa`" ] ; then
   echo please install puppet ssh key
   exit 0
@@ -40,8 +45,10 @@ fi
 cd $DIR
 bash r10k.sh
 
-cd $DIR/docker
-
+cd $DIR/../pupperware
 export DNS_ALT_NAMES=foo
 export PUPPERWARE_ANALYTICS_ENABLED=false
+docker-compose up -d
+
+cd $DIR/docker
 docker-compose up -d
