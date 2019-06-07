@@ -16,14 +16,13 @@ facts () {
   puppet_team=$4
   vpcid=$5
 
-  mkdir -p /etc/facter/facts.d
   echo "
 puppetserver=$puppet_host
 environment=$puppet_env
 role=$puppet_role
 team=$puppet_team
 vpcid=$vpcid
-  " > /etc/facter/facts.d/facts.txt
+  " > /opt/puppetlabs/facter/facts.d/facts.txt
 }
 
 puppetConf () {
