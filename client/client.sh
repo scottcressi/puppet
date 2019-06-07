@@ -1,12 +1,12 @@
 PUPPET_ROLE=$1
 PUPPET_ENVIRONMENT=$2
 PUPPET_TEAM=$3
+INSTANCE_ID=`< /dev/urandom tr -dc a-z | head -c${1:-16};echo;`
+echo $CERT
 
 prerequisites() {
  yum install -y https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm
- yum install -y puppet-agent-6.4.0
- yum install -y epel-release
- yum install -y pwgen
+ yum install -y puppet-agent-6.4.2
 }
 
 facts () {
@@ -27,7 +27,6 @@ vpcid=$vpcid
 }
 
 puppetConf () {
-  INSTANCE_ID=$(pwgen -A -0 16 1)
   puppet_env=$1
   puppet_host=$2
   echo "
