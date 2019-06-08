@@ -10,8 +10,6 @@ if [ -z $1 ] ; then echo enter test/destroy ; fi
 
 test(){
 # clean ssl
-find docker/volumes/puppet/ssl/ca/signed -type f | grep -v puppet.internal.pem | sudo xargs rm -f
-
 LIST='kvm kvm'
 for i in $LIST ; do
   NAME=`cat /dev/urandom | tr -dc 'a-z' | fold -w 8 | head -n 1`
