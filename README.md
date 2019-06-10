@@ -1,16 +1,21 @@
-1. run bootstrap
+0. clone pupperware next to puppet repo
+```
+git clone git@github.com:puppetlabs/pupperware.git ../pupperware
+```
+1. run puppet server / puppetdb / puppetboard
 ```
 bash bootstrap.sh
 ```
-2. check puppetfile validity
+3. clone hieradata into pupperware/volumes/puppet/
+4. check puppetfile validity
 ```
 bash check-puppetfile.sh
 ```
-3. deploy r10k to puppet server
+5. deploy r10k to puppet server
 ```
 bash r10k.sh
 ```
-4. run puppet agent
+6. run puppet agent
 ```
 bash puppet-agent-test.sh
 ```
