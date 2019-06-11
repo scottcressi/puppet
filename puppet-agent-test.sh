@@ -9,13 +9,16 @@ fi
 if [ -z $1 ] ; then echo enter test/destroy ; fi
 
 test(){
-# clean ssl
-LIST='kvm kvm'
-for i in $LIST ; do
+LIST=(CentOS CentOS)
+ROLE=(foo bar)
+for (( i=0; i<${#LIST[@]}; i++ )) ; do
+  echo ${LIST[i]} ${ROLE[i]}
   NAME=`cat /dev/urandom | tr -dc 'a-z' | fold -w 8 | head -n 1`
-  # run test
   docker run --net pupperware_default --name=$NAME --privileged -d -v /sys/fs/cgroup:/sys/fs/cgroup:ro centos/systemd-puppet
-  docker exec -e FACTER_virtual=$i -ti $NAME /bin/bash -c "/opt/puppetlabs/bin/puppet agent --test --certname $NAME --no-daemonize --summarize --environment=production --server puppet"
+  docker exec -ti $NAME /bin/bash -c " \
+  export FACTER_operatingsystem="${LIST[i]}" ; \
+  export FACTER_role="${ROLE[i]}" ; \
+  /opt/puppetlabs/bin/puppet agent --test --certname $NAME --no-daemonize --summarize --environment=production --server puppet"
 done
 }
 
