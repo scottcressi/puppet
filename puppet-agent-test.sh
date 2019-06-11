@@ -12,7 +12,9 @@ test(){
 LIST=(CentOS CentOS)
 ROLE=(foo bar)
 for (( i=0; i<${#LIST[@]}; i++ )) ; do
-  echo ${LIST[i]} ${ROLE[i]}
+  echo
+  echo "## Starting: ${LIST[i]} ${ROLE[i]} ##"
+  echo
   NAME=`cat /dev/urandom | tr -dc 'a-z' | fold -w 8 | head -n 1`
   docker run --net pupperware_default --name=$NAME --privileged -d -v /sys/fs/cgroup:/sys/fs/cgroup:ro centos/systemd-puppet
   docker exec -ti $NAME /bin/bash -c " \
