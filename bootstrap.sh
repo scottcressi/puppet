@@ -44,6 +44,7 @@ export DNS_ALT_NAMES=foo
 export PUPPERWARE_ANALYTICS_ENABLED=false
 docker-compose up -d
 
+cd $DIR
 sudo cp hiera.yaml ../pupperware/volumes/puppet/hiera.yaml
 
 cd $DIR/docker
