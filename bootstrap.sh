@@ -1,4 +1,6 @@
-if [ -z $1 ] ; then
+#!/usr/local/env bash
+
+if [ -z "$1" ] ; then
   echo hieradata repo url required
   exit 0
 fi
@@ -17,7 +19,7 @@ if ! command -v docker ; then
   exit 0
 fi
 
-if [ ! `sudo systemctl is-active docker` == "active" ]; then
+if [ ! "$(sudo systemctl is-active docker)" == "active" ]; then
   echo Please start docker
   exit 0
 fi
@@ -27,30 +29,30 @@ if ! command -v git ; then
   exit 0
 fi
 
-if [ ! -f "`eval echo ~/.ssh/id_rsa`" ] ; then
+if [ ! -f "$(eval echo ~/.ssh/id_rsa)" ] ; then
   echo please install puppet ssh key
   exit 0
 fi
 
-if [ ! -d "$DIR/../pupperware" ] ; then
-  git clone https://github.com/puppetlabs/pupperware.git $DIR/../pupperware
+if [ ! -d "$DIR"/../pupperware ] ; then
+  git clone https://github.com/puppetlabs/pupperware.git "$DIR"/../pupperware
 fi
 
-cd $DIR
+cd "$DIR"
 bash r10k.sh
 
-cd $DIR/../pupperware
+cd "$DIR"/../pupperware
 export DNS_ALT_NAMES=foo
 export PUPPERWARE_ANALYTICS_ENABLED=false
 docker-compose up -d
 
-cd $DIR
+cd "$DIR"
 sudo cp hiera.yaml ../pupperware/volumes/puppet/hiera.yaml
 
-cd $DIR/docker
+cd "$DIR"/docker
 docker-compose up -d
 
-if [ ! -d "$DIR/../pupperware/volumes/puppet/hieradata" ] ; then
-  sudo chmod 777 $DIR/../pupperware/volumes/puppet
-  git clone $HIERADATA $DIR/../pupperware/volumes/puppet/hieradata
+if [ ! -d "$DIR"/../pupperware/volumes/puppet/hieradata ] ; then
+  sudo chmod 777 "$DIR"/../pupperware/volumes/puppet
+  git clone "$HIERADATA" "$DIR"/../pupperware/volumes/puppet/hieradata
 fi
