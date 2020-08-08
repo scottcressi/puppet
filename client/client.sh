@@ -12,7 +12,7 @@ PUPPET_HOST=$4
 INSTANCE_ID=$ROLE-`< /dev/urandom tr -dc a-z | head -c${1:-16};echo;`
 
 yum install -y https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm
-yum install -y puppet-agent-6.6.0
+yum install -y puppet-agent-6.17.0
 
 echo "
 puppetserver=$PUPPET_HOST
