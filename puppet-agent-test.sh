@@ -20,7 +20,7 @@ for (( i=0; i<${#LIST[@]}; i++ )) ; do
   docker exec -ti $NAME /bin/bash -c " \
   export FACTER_operatingsystem="${LIST[i]}" ; \
   export FACTER_role="${ROLE[i]}" ; \
-  /opt/puppetlabs/bin/puppet agent --test --certname $NAME --no-daemonize --summarize --environment=production --server puppet"
+  /opt/puppetlabs/bin/puppet agent --test --certname $NAME --no-daemonize --summarize --environment=master --server puppet"
 done
 }
 
