@@ -2,7 +2,7 @@
 ```
 bash bootstrap.sh
 ```
-2. run r10k
+2. run r10k as root (for now)
 ```
 bash r10k.sh
 ```
