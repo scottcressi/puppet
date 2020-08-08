@@ -1,2 +1,225 @@
+---
 classes:
-- motd
+  - motd
+
+resource_tree::collections:
+  base-logs:
+    filebeat::prospector:
+      'syslogs':
+        paths: [
+          '/var/log/secure',
+        ]
+  base-services:
+    service:
+      node_exporter:
+        ensure: running
+        require: package[node_exporter]
+    file:
+      /etc/default/node_exporter:
+        content: 'NODE_EXPORTER_OPTS="--collector.processes --collector.mountstats --collector.ksmd --collector.interrupts"'
+        require: package[node_exporter]
+        notify: service[node_exporter]
+  base-repos:
+    yumrepo:
+      prometheus:
+        ensure: 'present'
+        name: 'prometheus'
+        baseurl: 'https://packagecloud.io/prometheus-rpm/release/el/7/$basearch'
+        enabled: '1'
+        gpgcheck: '0'
+        target: '/etc/yum.repo.d/prometheus.repo'
+  base-packages:
+    package:
+      python-psutil:
+        ensure: installed
+      node_exporter:
+        ensure: 0.18.0
+        require: yumrepo[prometheus]
+      unzip:
+        ensure: installed
+        before:
+          class: ['consul']
+
+  'spacewalkclient':
+    package:
+      'rhn-client-tools':
+        ensure: installed
+      'rhn-check':
+        ensure: installed
+      'rhn-setup':
+        ensure: installed
+      'rhnsd':
+        ensure: installed
+      'm2crypto':
+        ensure: installed
+      'yum-rhn-plugin':
+        ensure: installed
+      'osad':
+        ensure: installed
+    service:
+      'osad':
+        enable: true
+        ensure: running
+    file:
+      '/usr/share/rhn/RHN-ORG-TRUSTED-SSL-CERT':
+        content: |
+                 -----BEGIN CERTIFICATE-----
+                 MIIFIDCCBAigAwIBAgIJAMv1u0jxTzrJMA0GCSqGSIb3DQEBCwUAMIGbMQswCQYD
+                 VQQGEwJHQjELMAkGA1UECBMCTlkxEDAOBgNVBAcTB0JlbGZhc3QxDTALBgNVBAoT
+                 BEVOU08xLjAsBgNVBAsTJXNwYWNld2Fsay5pbmZyYS5ueWMuZW5zb2ZpbmFuY2lh
+                 bC5uZXQxLjAsBgNVBAMTJXNwYWNld2Fsay5pbmZyYS5ueWMuZW5zb2ZpbmFuY2lh
+                 bC5uZXQwHhcNMTcwNzE4MDgxNTU0WhcNMzgwMTE4MDgxNTU0WjCBmzELMAkGA1UE
+                 BhMCR0IxCzAJBgNVBAgTAk5ZMRAwDgYDVQQHEwdCZWxmYXN0MQ0wCwYDVQQKEwRF
+                 TlNPMS4wLAYDVQQLEyVzcGFjZXdhbGsuaW5mcmEubnljLmVuc29maW5hbmNpYWwu
+                 bmV0MS4wLAYDVQQDEyVzcGFjZXdhbGsuaW5mcmEubnljLmVuc29maW5hbmNpYWwu
+                 bmV0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuBALE7s1e4UJKEOQ
+                 Z+n4yU7yUhuNwbQsmWJbgefXgxlw6BHV9lBo7OIMw4ehqOP3THvPJfy69a1R+sYF
+                 GWDwztIfQZ8LDQFuxFSrilbIKHKehjvSb14VVZ0VmFxi0jdaHcOwcCJANUUs+50z
+                 2weUhf4JpUyfx2jhNkD7qWUbCtHMeKEfs2eGbi2++9hSzEdh1bXqAH3OGvxy3r2G
+                 kQc9x5PSrsGzs4UuOtLMZyZdB+52b9Z1t2InEB9QVR5nrdCEwXl0xBvsNjz1p6bh
+                 UmLkL8BJbIQDgOuoi0Hw3LR7B7TK3D/EFajBz2WzYUSTpAFbZxtNfOQZUG8JbVlm
+                 fOv1qwIDAQABo4IBYzCCAV8wDAYDVR0TBAUwAwEB/zALBgNVHQ8EBAMCAqQwHQYD
+                 VR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMDEGCWCGSAGG+EIBDQQkFiJSSE4g
+                 U1NMIFRvb2wgR2VuZXJhdGVkIENlcnRpZmljYXRlMB0GA1UdDgQWBBT+0N/QbiZ0
+                 hLVTYMUI9OUl5K6ocDCB0AYDVR0jBIHIMIHFgBT+0N/QbiZ0hLVTYMUI9OUl5K6o
+                 cKGBoaSBnjCBmzELMAkGA1UEBhMCR0IxCzAJBgNVBAgTAk5ZMRAwDgYDVQQHEwdC
+                 ZWxmYXN0MQ0wCwYDVQQKEwRFTlNPMS4wLAYDVQQLEyVzcGFjZXdhbGsuaW5mcmEu
+                 bnljLmVuc29maW5hbmNpYWwubmV0MS4wLAYDVQQDEyVzcGFjZXdhbGsuaW5mcmEu
+                 bnljLmVuc29maW5hbmNpYWwubmV0ggkAy/W7SPFPOskwDQYJKoZIhvcNAQELBQAD
+                 ggEBAAe5COf6VbvGiNRUBW5IgBA5jpe1np2izPT4xBxyK8VDLjuLpnXayWC3GAr6
+                 FJPDL87Oywv+3saJ6F1Ua/K+AGvM9pRa4zqvfG7cnhCCJGclETOpXLwMAHvj1UQL
+                 FGOfHU3pg/m2tS+qvp21neBAOmhHRhiXK5WGAdw/yXN6b6Fj0Xawf1Vb0EWL7hkF
+                 mdQedOKkDDJbGQqMFzC1TjKrG47jAZ6CK7UrZjrtQ+2MA02eFOsw3zCw0IG0LbCM
+                 VinFaf4UUAM+nOglwtJ8u8UVWDk5G/0ys/pV8qZgCTKgzdh+rd8CKcBiefaG6msu
+                 mtuxx63U/nVeTynUaA0t9OUtoBI=
+                 -----END CERTIFICATE-----
+
+  'ossec-client':
+    exec:
+      'ossec client key generation':
+        command: "/var/ossec/bin/agent-auth -m %{hiera('ossec_server')} -p 1515"
+        onlyif: 'test ! -s /var/ossec/etc/client.keys'
+        path: ['/bin']
+      'ossec start execd':
+        command: "/var/ossec/bin/ossec-control restart"
+        unless: 'pgrep -fc ossec-execd'
+        path: ['/usr/bin']
+      'ossec start agentd':
+        command: "/var/ossec/bin/ossec-control restart"
+        unless: 'pgrep -fc ossec-agentd'
+        path: ['/usr/bin']
+      'ossec start logcollector':
+        command: "/var/ossec/bin/ossec-control restart"
+        unless: 'pgrep -fc ossec-logcollector'
+        path: ['/usr/bin']
+      'ossec start syscheckd':
+        command: "/var/ossec/bin/ossec-control restart"
+        unless: 'pgrep -fc ossec-syscheckd'
+        path: ['/usr/bin']
+
+  'spacewalk-server':
+    package:
+      'c3p0':
+        ensure: installed
+
+# spacewalkclient
+rhn_register::activationkey: '1-88a49d8688890501a3'
+rhn_register::serverurl: 'https://spacewalk.infra.nyc.example.net/XMLRPC'
+rhn_register::sslca: '/usr/share/rhn/RHN-ORG-TRUSTED-SSL-CERT'
+
+# company
+company: 'example'
+
+# puppet agent
+puppet_agent::package_version: '6.6.0'
+puppet_agent::service_names: ['puppet']
+puppet_agent::collection: 'puppet6'
+
+# ntp
+ntp::service_manage: true
+
+# ossec-client
+ossec::client::ossec_server_ip: "127.0.0.1"
+ossec::client::manage_client_keys: false
+
+# sssd
+sssd::config:
+  'sssd':
+    'domains': ['example.net', 'ipa.example.net']
+    'default_domain_suffix': 'example.net'
+    'config_file_version': 2
+    'services':
+      - 'nss'
+      - 'sudo'
+      - 'pam'
+      - 'ssh'
+  'domain/ipa.example.net':
+    'cache_credentials': true
+    'krb5_store_password_if_offline': true
+    'ipa_domain': 'ipa.example.net'
+    'id_provider': 'ipa'
+    'auth_provider': 'ipa'
+    'access_provider': 'ipa'
+    'chpass_provider': 'ipa'
+    'ipa_server':
+      - '_srv_'
+      - 'ipa01.ipa.example.net'
+    'dns_discovery_domain': 'ipa.example.net'
+  'domain/example.net':
+    'ad_domain': example.net
+    'krb5_realm': 'IPA.example.NET'
+    'realmd_tags': ['manages-system', 'joined-with-samba']
+    'cache_credentials': true
+    'id_provider': 'ad'
+    'krb5_store_password_if_offline': true
+    'default_shell': '/bin/bash'
+    'ldap_id_mapping': true
+    'use_fully_qualified_names': false
+    'fallback_homedir': '/home/%u'
+    'access_provider': 'ad'
+
+# SSH
+ssh::server_options:
+  PrintMotd: 'yes'
+  Ciphers:
+    'aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com,chacha20-poly1305@openssh.com'
+  MACs:
+    'hmac-sha1-etm@openssh.com,umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-ripemd160-etm@openssh.com,hmac-sha1,umac-64@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-ripemd160'
+ssh::storeconfigs_enabled: false
+
+# selinux
+selinux::mode: 'permissive'
+
+# consul
+consul::version: '1.5.0'
+consul::config_hash:
+  data_dir: '/opt/consul'
+  datacenter: "%{hiera('region')}-%{::environment}"
+  log_level: 'WARN'
+  node_name: '%{::networking.hostname}'
+  retry_join: ['%{hiera("consul")}']
+  bind_addr: '%{::ipaddress}'
+  encrypt: '%{hiera("consul_encrypt")}'
+  encrypt_verify_incoming: true
+  encrypt_verify_outgoing: true
+consul::services:
+  node_exporter:
+    address: ""
+    port: 9100
+    tags:
+      - "ip: %{::ipaddress}"
+      - "team: %{::team}"
+      - "role: %{::role}"
+      - "dc: %{::dc}"
+      - "environment: %{::environment}"
+
+# filebeat
+filebeat::outputs:
+  logstash:
+    hosts: ['%{hiera("elk_logstash")}:5044']
+# filebeat
+filebeat::logging:
+  level: warning
+filebeat::major_version: '6'
+filebeat::package_ensure: '6.8.0'
+filebeat::service_provider: 'systemd'

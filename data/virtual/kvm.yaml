@@ -1,0 +1,18 @@
+---
+classes:
+  - selinux
+  - epel
+  - resource_tree
+  - ntp
+  - filebeat
+  - puppet_agent
+  - ssh
+  - consul
+  - archive
+
+resource_tree::apply:
+  - filebeat
+  - base-packages
+  - base-logs
+  - base-services
+  - base-repos
