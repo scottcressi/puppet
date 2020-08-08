@@ -1,5 +1,5 @@
-:cachedir: 'docker/r10k_cache'
+:cachedir: 'r10k_cache'
 sources:
   repositories:
     remote: 'git@github.com:scottcressi/puppet'
-    basedir: '/var/tmp/pupperware/volumes/code/environments'
+    basedir: '/var/lib/docker/volumes/pupperware_puppetserver-code/_data/environments'
