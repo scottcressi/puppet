@@ -18,3 +18,5 @@ if ! command -v git ; then echo git is not installed ;  exit 0 ; fi
 export DNS_ALT_NAMES=foo
 export PUPPERWARE_ANALYTICS_ENABLED=false
 cd /var/tmp/pupperware && docker-compose up -d
+
+echo as root run: r10k deploy environment -c r10k.yaml --verbose
