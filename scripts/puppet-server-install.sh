@@ -15,4 +15,4 @@ export PUPPERWARE_ANALYTICS_ENABLED=false
 cd /var/tmp/pupperware && docker-compose up -d
 
 echo as root run: r10k deploy environment -c r10k.yaml --verbose
-echo don't forget to manually clone to accept the fingerprint
+echo do not forget to manually clone to accept the fingerprint
