@@ -14,7 +14,7 @@ services:
       - -m
       - SimpleHTTPServer
     volumes:
-      - ../client:/usr/src/myapp
+      - ../:/usr/src/myapp
     working_dir: /usr/src/myapp
     ports:
       - 80:8000
