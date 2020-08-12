@@ -9,8 +9,8 @@ fi
 if [ -z $1 ] ; then echo enter test/destroy ; fi
 
 test(){
-LIST=(CentOS CentOS)
-ROLE=(foo bar)
+LIST=(CentOS)
+ROLE=(foo)
 VIRTUAL=(kvm)
 for (( i=0; i<${#LIST[@]}; i++ )) ; do
   echo
