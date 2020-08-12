@@ -11,15 +11,17 @@ if [ -z $1 ] ; then echo enter test/destroy ; fi
 test(){
 LIST=(CentOS CentOS)
 ROLE=(foo bar)
+VIRTUAL=(kvm)
 for (( i=0; i<${#LIST[@]}; i++ )) ; do
   echo
-  echo "## Starting: ${LIST[i]} ${ROLE[i]} ##"
+  echo "## Starting: ${LIST[i]} ${ROLE[i]} ${VIRTUAL[i]} ##"
   echo
   NAME=`cat /dev/urandom | tr -dc 'a-z' | fold -w 8 | head -n 1`
   docker run --net pupperware_default --name=$NAME --privileged -d -v /sys/fs/cgroup:/sys/fs/cgroup:ro centos/systemd-puppet
   docker exec -ti $NAME /bin/bash -c " \
   export FACTER_operatingsystem="${LIST[i]}" ; \
   export FACTER_role="${ROLE[i]}" ; \
+  export FACTER_virtual="${VIRTUAL[i]}" ; \
   /opt/puppetlabs/bin/puppet agent --test --certname $NAME --no-daemonize --summarize --environment=master --server puppet"
 done
 }
