@@ -3,7 +3,7 @@ if [ -z "$1" ] ; then echo enter test/destroy ; fi
 test(){
     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-    cd docker/build || exit
+    cd "$DIR"/docker/build || exit
     docker build --tag centos/systemd-puppet .
     cd "$DIR" || exit
 
@@ -14,7 +14,7 @@ test(){
 
 destroy(){
     set -x
-    for i in "$(docker ps | grep centos/systemd-puppet | awk '{print $1}')" ; do
+    for i in $(docker ps | grep centos/systemd-puppet | awk '{print $1}') ; do
     docker kill $i
     done
 }
