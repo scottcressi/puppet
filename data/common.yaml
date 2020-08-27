@@ -4,7 +4,7 @@ classes:
 
 resource_tree::collections:
   base-logs:
-    filebeat::prospector:
+    filebeat::input:
       'syslogs':
         paths: [
           '/var/log/secure',
@@ -37,6 +37,6 @@ filebeat::outputs:
 # filebeat
 filebeat::logging:
   level: warning
-filebeat::major_version: '6'
-filebeat::package_ensure: '6.8.0'
+filebeat::major_version: '7'
+filebeat::package_ensure: '7.9.0'
 filebeat::service_provider: 'systemd'
