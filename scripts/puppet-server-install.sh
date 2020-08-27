@@ -19,5 +19,5 @@ cd /var/tmp/pupperware && docker-compose up -d
 cd "$DIR"/docker && docker-compose up -d
 
 echo
-echo run: sudo r10k deploy environment -c r10k.yaml --puppetfile --verbose
+echo run: bash r10k.sh
 echo

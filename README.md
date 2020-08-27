@@ -2,7 +2,7 @@
 ```
 bash scripts/puppet-server-install.sh
 ```
-2. run r10k as root (for now)
+2. run r10k
 ```
 bash r10k.sh
 ```
