@@ -3,7 +3,6 @@ classes:
   - selinux
   - epel
   - resource_tree
-  - ntp
   - filebeat
   - puppet_agent
   - ssh

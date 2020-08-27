@@ -18,9 +18,6 @@ puppet_agent::package_version: '6.6.0'
 puppet_agent::service_names: ['puppet']
 puppet_agent::collection: 'puppet6'
 
-# ntp
-ntp::service_manage: true
-
 # SSH
 ssh::server_options:
   PrintMotd: 'yes'
