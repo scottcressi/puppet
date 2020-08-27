@@ -8,5 +8,5 @@ bash r10k.sh
 ```
 3. run puppet agent (optional)
 ```
-bash scripts/puppet-agent-test.sh
+bash scripts/puppet-agent-test.sh test
 ```
