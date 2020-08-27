@@ -11,7 +11,7 @@ if ! command -v r10k ; then echo r10k is not installed ;  exit 0 ; fi
 [[ ! -d /var/tmp/pupperware ]] && git clone https://github.com/puppetlabs/pupperware.git /var/tmp/pupperware
 
 # start puppet
-export DNS_ALT_NAMES=foo
+#export DNS_ALT_NAMES=foo
 export PUPPERWARE_ANALYTICS_ENABLED=false
 export PUPPETDB_VERSION=6.11.0
 export PUPPETSERVER_VERSION=6.12.1
