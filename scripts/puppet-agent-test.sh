@@ -8,7 +8,7 @@ test(){
     cd "$DIR" || exit
 
     NAME="test-puppet-agent-$(cat /dev/urandom | tr -dc 'a-z' | fold -w 8 | head -n 1)"
-    docker run --net pupperware_default --name="$NAME" -d -v /home/debian/repos/personal/puppet/scripts/facts.txt:/opt/puppetlabs/facter/facts.d/facts.txt centos/systemd-puppet
+    docker run --net pupperware_default --name="$NAME" -d -v ~/repos/personal/puppet/scripts/facts.txt:/opt/puppetlabs/facter/facts.d/facts.txt centos/systemd-puppet
     docker exec -ti "$NAME" /bin/bash
 }
 
