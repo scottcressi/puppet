@@ -10,3 +10,4 @@ serverdata/
 Gemfile.lock
 .bundle/
 .ruby-version
+facts.txt
