@@ -26,7 +26,7 @@ echo "
 server      = $PUPPET_HOST
 environment = $PUPPET_ENVIRONMENT
 certname    = $INSTANCE_ID
-runinterval = 1d
+runinterval = 30m
 " > /etc/puppetlabs/puppet/puppet.conf
 
 /opt/puppetlabs/bin/puppet agent -t
