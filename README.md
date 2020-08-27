@@ -4,7 +4,7 @@ bash scripts/puppet-server-install.sh
 ```
 2. run r10k as root (for now)
 ```
-bash scripts/r10k.sh
+bash r10k.sh
 ```
 3. run puppet agent (optional)
 ```
