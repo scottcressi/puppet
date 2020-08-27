@@ -6,7 +6,6 @@ classes:
   - filebeat
   - puppet_agent
   - ssh
-  - consul
   - archive
 
 resource_tree::apply:
