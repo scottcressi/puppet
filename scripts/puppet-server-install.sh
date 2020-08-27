@@ -18,5 +18,6 @@ export PUPPETSERVER_VERSION=6.12.1
 cd /var/tmp/pupperware && docker-compose up -d
 cd "$DIR"/docker && docker-compose up -d
 
-echo as root run: r10k deploy environment -c r10k.yaml --verbose
-echo remember to manually clone to accept the fingerprint
+echo
+echo run: sudo r10k deploy environment -c r10k.yaml --verbose
+echo
