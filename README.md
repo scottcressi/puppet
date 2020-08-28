@@ -1,4 +1,4 @@
-* server install
+# server install
 1. run bootstrap
 ```
 bash scripts/puppet-server-install.sh
@@ -8,7 +8,7 @@ bash scripts/puppet-server-install.sh
 bash r10k.sh
 ```
 
-* testing
+# testing
 1. edit scripts/facts.txt (optional)
 ```
 vi scripts/facts.txt
