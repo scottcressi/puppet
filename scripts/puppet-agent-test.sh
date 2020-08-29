@@ -13,7 +13,6 @@ test(){
 }
 
 destroy(){
-    set -x
     for i in $(docker ps | grep centos/systemd-puppet | awk '{print $1}') ; do
     docker kill $i
     done
