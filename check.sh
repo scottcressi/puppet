@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if ! command -v r10k ; then echo r10k gem is not installed ;  exit 0 ; fi
 if ! command -v puppet ; then echo puppet gem is not installed ;  exit 0 ; fi
 if ! command -v yamllint ; then echo yamllimt is not installed ;  exit 0 ; fi

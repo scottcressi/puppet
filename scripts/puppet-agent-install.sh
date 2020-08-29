@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if [ -z "$1" ] ; then echo missing puppet role && exit 1 ; fi
 if [ -z "$2" ] ; then echo missing puppet env && exit 1 ; fi
 if [ -z "$3" ] ; then echo missing team && exit 1 ; fi

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if [ -z "$1" ] ; then echo enter test/destroy ; fi
 
 test(){
