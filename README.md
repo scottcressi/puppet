@@ -3,7 +3,7 @@
 ```
 bash scripts/puppet-server-install.sh
 ```
-2. run r10k
+2. run r10k (r10k.yaml must contain your puppet repo)
 ```
 bash r10k.sh
 ```

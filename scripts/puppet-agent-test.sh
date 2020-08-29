@@ -8,12 +8,12 @@ test(){
     cd "$DIR" || exit
 
     NAME="test-puppet-agent-$(cat /dev/urandom | tr -dc 'a-z' | fold -w 8 | head -n 1)"
-    docker run --net pupperware_default --name="$NAME" -d -v $DIR/facts.txt:/opt/puppetlabs/facter/facts.d/facts.txt --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro centos/systemd-puppet
+    docker run --net pupperware_default --name="$NAME" -d -v "$DIR"/facts.txt:/opt/puppetlabs/facter/facts.d/facts.txt --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro centos/systemd-puppet
     docker exec -ti "$NAME" /bin/bash
 }
 
 destroy(){
-    for i in $(docker ps | grep centos/systemd-puppet | awk '{print $1}') ; do
+    for i in $(docker ps | grep test-puppet-agent | awk '{print $1}') ; do
     docker kill $i
     done
 }
