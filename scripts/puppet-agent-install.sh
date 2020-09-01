@@ -11,7 +11,8 @@ PUPPET_TEAM=$3
 PUPPET_HOST=$4
 
 # pre set
-INSTANCE_ID=$ROLE-`< /dev/urandom tr -dc a-z | head -c${1:-16};echo;`
+UUID="$(head /dev/urandom | tr -dc a-z0-9 | head -c 13 ; echo '')"
+INSTANCE_ID=$ROLE-$UUID
 
 yum install -y https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm
 yum install -y puppet-agent-6.17.0

@@ -9,7 +9,8 @@ test(){
     docker build --tag centos/systemd-puppet .
     cd "$DIR" || exit
 
-    NAME="test-puppet-agent-$(cat /dev/urandom | tr -dc 'a-z' | fold -w 8 | head -n 1)"
+    UUID="$(head /dev/urandom | tr -dc a-z0-9 | head -c 13 ; echo '')"
+    NAME=test-puppet-agent-$UUID
     docker run --net pupperware_default --name="$NAME" -d -v "$DIR"/facts.txt:/opt/puppetlabs/facter/facts.d/facts.txt --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro centos/systemd-puppet
     docker exec -ti "$NAME" /bin/bash
 }
