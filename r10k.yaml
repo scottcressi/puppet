@@ -1,4 +1,3 @@
-:cachedir: '/var/tmp/r10k_cache'
 sources:
   repositories:
     remote: 'git@github.com:scottcressi/puppet'
