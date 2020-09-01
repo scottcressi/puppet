@@ -15,9 +15,7 @@ test(){
 }
 
 destroy(){
-    for i in $(docker ps | grep test-puppet-agent | awk '{print $1}') ; do
-    docker kill $i
-    done
+    docker ps | grep test-puppet-agent | awk '{print $1}' |xargs docker kill
 }
 
 "$@"
