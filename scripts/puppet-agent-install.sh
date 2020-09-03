@@ -9,7 +9,7 @@ PUPPET_ENVIRONMENT=$2
 PUPPET_SERVER=$3
 
 yum install -y https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm
-yum install -y puppet-agent-6.17.0
+yum install -y puppet-agent-6.18.0
 
 echo "
 puppetserver=$PUPPET_SERVER

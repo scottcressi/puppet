@@ -14,7 +14,7 @@ resource_tree::collections:
 company: 'example'
 
 # puppet agent
-puppet_agent::package_version: '6.17.0'
+puppet_agent::package_version: '6.18.0'
 puppet_agent::service_names: ['puppet']
 puppet_agent::collection: 'puppet6'
 
