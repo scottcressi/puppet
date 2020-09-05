@@ -21,5 +21,5 @@ puppet agent -t --environment $ENV
 # syntax checking (optional)
 1. run check script
 ```
-bash check.sh
+bash scripts/check.sh
 ```
