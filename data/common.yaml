@@ -5,10 +5,70 @@ classes:
 resource_tree::collections:
   base-logs:
     filebeat::input:
-      'syslogs':
+      syslogs:
         paths: [
           '/var/log/secure',
         ]
+  base-packages:
+    package:
+      telegraf:
+         ensure: installed
+         source: https://dl.influxdata.com/telegraf/releases/telegraf-1.15.2-1.x86_64.rpm
+    service:
+      telegraf:
+        ensure: running
+        require: package[telegraf]
+    file:
+      /etc/telegraf/telegraf.conf:
+        require: package[telegraf]
+        notify: service[telegraf]
+        content: |
+                 [agent]
+                   hostname = "%{virtual}-%{role}-%{hostname}"
+                   omit_hostname = false
+                   interval = "5s"
+                 [[outputs.influxdb]]
+                   urls = ["http://%{hiera('influxdb')}:8086"]
+                   database = "telegraf"
+                 [[inputs.bond]]
+                 [[inputs.cgroup]]
+                 [[inputs.conntrack]]
+                 [[inputs.cpu]]
+                   percpu = true
+                   totalcpu = true
+                 [[inputs.disk]]
+                 [[inputs.diskio]]
+                 [[inputs.dns_query]]
+                   servers = ["192.168.1.1"]
+                 [[inputs.docker]]
+                 [[inputs.docker_log]]
+                 [[inputs.ethtool]]
+                 [[inputs.hddtemp]]
+                   address = "hddtemp:7634"
+                 [[inputs.influxdb]]
+                   urls = ["http://%{hiera('influxdb')}:8086/debug/vars"]
+                 [[inputs.internal]]
+                   collect_memstats = true
+                 [[inputs.interrupts]]
+                 [[inputs.iptables]]
+                 [[inputs.ipvs]]
+                 [[inputs.kernel]]
+                 [[inputs.kernel_vmstat]]
+                 [[inputs.linux_sysctl_fs]]
+                 [[inputs.mem]]
+                 [[inputs.net]]
+                 [[inputs.netstat]]
+                 [[inputs.nstat]]
+                 [[inputs.ping]]
+                   urls = ["192.168.1.1"]
+                 [[inputs.processes]]
+                 [[inputs.sensors]]
+                 [[inputs.swap]]
+                 [[inputs.syslog]]
+                   server = "tcp://:6514"
+                 [[inputs.system]]
+                 [[inputs.temp]]
+                 [[inputs.wireless]]
 
 # company
 company: 'example'
