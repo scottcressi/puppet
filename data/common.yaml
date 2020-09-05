@@ -40,8 +40,6 @@ resource_tree::collections:
                  [[inputs.diskio]]
                  [[inputs.dns_query]]
                    servers = ["192.168.1.1"]
-                 [[inputs.docker]]
-                 [[inputs.docker_log]]
                  [[inputs.ethtool]]
                  [[inputs.hddtemp]]
                    address = "hddtemp:7634"
