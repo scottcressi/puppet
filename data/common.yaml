@@ -98,3 +98,6 @@ filebeat::logging:
 filebeat::major_version: '7'
 filebeat::package_ensure: '7.9.0'
 filebeat::service_provider: 'systemd'
+
+# telegraf
+influxdb: localhost
