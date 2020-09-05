@@ -12,8 +12,8 @@ resource_tree::collections:
   base-packages:
     package:
       telegraf:
-         ensure: installed
-         source: https://dl.influxdata.com/telegraf/releases/telegraf-1.15.2-1.x86_64.rpm
+        ensure: installed
+        source: https://dl.influxdata.com/telegraf/releases/telegraf-1.15.2-1.x86_64.rpm
     service:
       telegraf:
         ensure: running
