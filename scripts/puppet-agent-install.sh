@@ -3,6 +3,7 @@
 PUPPET_ROLE=$1
 PUPPET_ENVIRONMENT=$2
 PUPPET_SERVER=$3
+CONFIRM=$4
 
 if [ -z "$PUPPET_ROLE" ] ; then echo missing puppet role && exit 1 ; fi
 if [ -z "$PUPPET_ENVIRONMENT" ] ; then echo missing puppet env && exit 1 ; fi
@@ -14,8 +15,14 @@ echo "env:    $PUPPET_ENVIRONMENT"
 echo "server: $PUPPET_SERVER"
 echo
 
+if [ "$CONFIRM" != "confirm" ] ; then
+    echo set confirm to apply
+    exit 0
+fi
+
 if [ "$(awk /^ID/ /etc/os-release)" == "ID=debian" ] ; then
     echo put debian packages here
+    exit 0
 elif [ "$(awk /^ID/ /etc/os-release)" == "ID=centos" ] ; then
     yum install -y https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm
     yum install -y puppet-agent-6.18.0
