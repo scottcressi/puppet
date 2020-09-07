@@ -21,11 +21,23 @@ echo "env:    $PUPPET_ENVIRONMENT"
 echo "server: $PUPPET_SERVER"
 echo
 
+if [ "$CONFIRM" != "confirm" ] ; then
+    echo set confirm to apply
+    exit 0
+fi
+
+if [ "$(awk /^ID/ /etc/os-release)" == "ID=debian" ] ; then
+    echo put debian packages here
+elif [ "$(awk /^ID/ /etc/os-release)" == "ID=centos" ] ; then
+    yum install -y $REPO
+    yum install -y puppet-agent-$VERSION
+fi
+
 echo "
 puppetserver=$PUPPET_SERVER
 environment=$PUPPET_ENVIRONMENT
 role=$PUPPET_ROLE
-" > /tmp/facts.txt
+" > $PUPPET_FACTSDIR/facts.txt
 
 echo "
 [agent]
@@ -33,22 +45,6 @@ server      = $PUPPET_SERVER
 environment = $PUPPET_ENVIRONMENT
 certname    = $PUPPET_ROLE-$(head /dev/urandom | tr -dc a-z0-9 | head -c 13 ; echo '')
 runinterval = 30m
-" > /tmp/puppet.conf
-
-if [ "$CONFIRM" != "confirm" ] ; then
-    echo set confirm to apply
-    exit 0
-fi
-
-if [ "$(awk /^ID/ /etc/os-release)" == "ID=centos" ] ; then
-    yum install -y $REPO
-    yum install -y puppet-agent-$VERSION
-else
-    echo puppet did not get installed
-    exit 0
-fi
-
-mv /tmp/facts.txt $PUPPET_FACTSDIR/facts.txt
-mv /tmp/puppet.conf $PUPPET_CONFDIR/puppet.conf
+" > $PUPPET_CONFDIR/puppet.conf
 
 $PUPPET_BINDIR/puppet agent -t
