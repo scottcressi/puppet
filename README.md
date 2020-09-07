@@ -23,3 +23,13 @@ puppet agent -t --environment $ENV
 ```
 bash scripts/check.sh
 ```
+
+# installing agent on server (optional)
+1. run agent install script
+```
+bash scripts/puppet-agent-install.sh somerole someenv someserver
+```
+2. run agent install script with confirm to apply
+```
+bash scripts/puppet-agent-install.sh somerole someenv someserver confirm
+```
