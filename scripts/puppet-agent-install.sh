@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+PUPPET_FACTSDIR=/opt/puppetlabs/facter/facts.d
+PUPPET_BINDIR=/opt/puppetlabs/bin
+PUPPET_CONFDIR=/etc/puppetlabs/puppet
+
 PUPPET_ROLE=$1
 PUPPET_ENVIRONMENT=$2
 PUPPET_SERVER=$3
@@ -22,7 +26,6 @@ fi
 
 if [ "$(awk /^ID/ /etc/os-release)" == "ID=debian" ] ; then
     echo put debian packages here
-    exit 0
 elif [ "$(awk /^ID/ /etc/os-release)" == "ID=centos" ] ; then
     yum install -y https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm
     yum install -y puppet-agent-6.18.0
@@ -32,7 +35,7 @@ echo "
 puppetserver=$PUPPET_SERVER
 environment=$PUPPET_ENVIRONMENT
 role=$PUPPET_ROLE
-" > /opt/puppetlabs/facter/facts.d/facts.txt
+" > $PUPPET_FACTSDIR/facts.txt
 
 echo "
 [agent]
@@ -40,6 +43,6 @@ server      = $PUPPET_SERVER
 environment = $PUPPET_ENVIRONMENT
 certname    = $PUPPET_ROLE-$(head /dev/urandom | tr -dc a-z0-9 | head -c 13 ; echo '')
 runinterval = 30m
-" > /etc/puppetlabs/puppet/puppet.conf
+" > $PUPPET_CONFDIR/puppet.conf
 
-/opt/puppetlabs/bin/puppet agent -t
+$PUPPET_BINDIR/puppet agent -t
