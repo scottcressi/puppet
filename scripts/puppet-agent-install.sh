@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+VERSION=6.18.0
+REPO=https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm
 PUPPET_FACTSDIR=/opt/puppetlabs/facter/facts.d
 PUPPET_BINDIR=/opt/puppetlabs/bin
 PUPPET_CONFDIR=/etc/puppetlabs/puppet
@@ -27,8 +29,8 @@ fi
 if [ "$(awk /^ID/ /etc/os-release)" == "ID=debian" ] ; then
     echo put debian packages here
 elif [ "$(awk /^ID/ /etc/os-release)" == "ID=centos" ] ; then
-    yum install -y https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm
-    yum install -y puppet-agent-6.18.0
+    yum install -y $REPO
+    yum install -y puppet-agent-$VERSION
 fi
 
 echo "
