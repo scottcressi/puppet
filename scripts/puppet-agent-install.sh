@@ -27,11 +27,12 @@ if [ "$CONFIRM" != "confirm" ] ; then
 fi
 
 OS=$(awk /^ID=/ /etc/os-release | sed s/\"//g)
-if [ "$OS" == "ID=debian" ] ; then
-    echo put debian packages here
-elif [ "$OS" == "ID=centos" ] ; then
+if [ "$OS" == "ID=centos" ] ; then
     yum install -y $REPO
     yum install -y puppet-agent-$VERSION
+elif [ "$OS" == "ID=debian" ] ; then
+    echo put debian packages here
+    exit 0
 fi
 
 echo "
