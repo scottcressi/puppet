@@ -33,3 +33,8 @@ bash <(curl -s https://raw.githubusercontent.com/scottcressi/puppet/master/scrip
 ```
 bash <(curl -s https://raw.githubusercontent.com/scottcressi/puppet/master/scripts/puppet-agent-install.sh) somerole someenv someserver confirm
 ```
+
+# TODO:
+```
+implement vault for secrets
+```
