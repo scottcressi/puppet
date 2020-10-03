@@ -7,7 +7,7 @@ list(){
 }
 
 clean(){
-    docker exec -ti pupperware_puppet_1 puppetserver ca clean --certname $1
+    docker exec -ti pupperware_puppet_1 puppetserver ca clean --certname "$1"
 }
 
 "$@"
