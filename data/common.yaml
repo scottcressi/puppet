@@ -101,5 +101,5 @@ filebeat::outputs:
 filebeat::logging:
   level: warning
 filebeat::major_version: '7'
-filebeat::package_ensure: '7.9.0'
+filebeat::package_ensure: '7.9.2'
 filebeat::service_provider: 'systemd'
