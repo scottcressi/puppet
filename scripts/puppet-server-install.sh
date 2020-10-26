@@ -15,7 +15,7 @@ if ! command -v r10k ; then echo r10k is not installed ;  exit 0 ; fi
 #export DNS_ALT_NAMES=foo
 export PUPPERWARE_ANALYTICS_ENABLED=false
 export PUPPETDB_VERSION=6.12.0
-export PUPPETSERVER_VERSION=6.12.1
+export PUPPETSERVER_VERSION=6.14.0
 
 # start puppet
 cd $pupperware_dir/pupperware && docker-compose up -d

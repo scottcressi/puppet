@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION=6.18.0
+VERSION=6.19.1
 REPO=https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm
 PUPPET_FACTSDIR=/opt/puppetlabs/facter/facts.d
 PUPPET_BINDIR=/opt/puppetlabs/bin

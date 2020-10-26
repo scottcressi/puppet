@@ -17,7 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         echo "192.168.1.7 puppet" >> /etc/hosts;
     fi
     yum install -y https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm
-    yum install -y puppet-agent-6.18.0
+    yum install -y puppet-agent-6.19.1
     echo virtual=kvm > /opt/puppetlabs/facter/facts.d/facts.txt
     rm -r /etc/puppetlabs/puppet/ssl
     CERTNAME=$(cat /dev/urandom | tr -dc 'a-z' | fold -w 8 | head -n 1)

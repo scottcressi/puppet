@@ -79,7 +79,7 @@ company: 'example'
 influxdb: 'influxdb'
 
 # puppet agent
-puppet_agent::package_version: '6.18.0'
+puppet_agent::package_version: '6.19.1'
 puppet_agent::service_names: []
 puppet_agent::collection: 'puppet6'
 
