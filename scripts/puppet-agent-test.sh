@@ -13,21 +13,25 @@ options:
     exit 0
 fi
 
+client-test(){
+    DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+    UUID="$(head /dev/urandom | tr -dc a-z0-9 | head -c 13 ; echo '')"
+    NAME=test-puppet-agent-$UUID
+    cd "$DIR"/docker/build && docker build --tag centos/systemd-puppet .
+    docker run \
+        -d \
+        --privileged \
+        --net pupperware_default \
+        --name="$NAME" \
+        -v "$DIR"/facts.txt:/opt/puppetlabs/facter/facts.d/facts.txt \
+        -v /sys/fs/cgroup:/sys/fs/cgroup:ro centos/systemd-puppet
+    docker exec -ti "$NAME" /bin/bash
+}
+
 while [ $# -gt 0 ]; do
   case "$1" in
     --client-test)
-        DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-        UUID="$(head /dev/urandom | tr -dc a-z0-9 | head -c 13 ; echo '')"
-        NAME=test-puppet-agent-$UUID
-        cd "$DIR"/docker/build && docker build --tag centos/systemd-puppet .
-        docker run \
-            -d \
-            --privileged \
-            --net pupperware_default \
-            --name="$NAME" \
-            -v "$DIR"/facts.txt:/opt/puppetlabs/facter/facts.d/facts.txt \
-            -v /sys/fs/cgroup:/sys/fs/cgroup:ro centos/systemd-puppet
-        docker exec -ti "$NAME" /bin/bash
+        client-test
       ;;
     --client-destroy)
         docker ps | awk '/test-puppet-agent/ {print $1}' | xargs docker kill
