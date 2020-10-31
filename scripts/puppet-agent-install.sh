@@ -6,10 +6,23 @@ PUPPET_FACTSDIR=/opt/puppetlabs/facter/facts.d
 PUPPET_BINDIR=/opt/puppetlabs/bin
 PUPPET_CONFDIR=/etc/puppetlabs/puppet
 
-PUPPET_ROLE=$1
-PUPPET_ENVIRONMENT=$2
-PUPPET_SERVER=$3
-CONFIRM=$4
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --role)
+        PUPPET_ROLE=$2
+      ;;
+    --env)
+        PUPPET_ENVIRONMENT=$2
+      ;;
+    --server)
+        PUPPET_SERVER=$2
+      ;;
+    --confirm)
+        CONFIRM=true
+      ;;
+  esac
+  shift
+done
 
 if [ -z "$PUPPET_ROLE" ] ; then echo missing puppet role && exit 1 ; fi
 if [ -z "$PUPPET_ENVIRONMENT" ] ; then echo missing puppet env && exit 1 ; fi
@@ -21,7 +34,7 @@ echo "env:    $PUPPET_ENVIRONMENT"
 echo "server: $PUPPET_SERVER"
 echo
 
-if [ "$CONFIRM" != "confirm" ] ; then
+if [ "$CONFIRM" != "true" ] ; then
     echo set confirm to apply
     exit 0
 fi
