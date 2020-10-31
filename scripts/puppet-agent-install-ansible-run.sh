@@ -6,9 +6,6 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 export ANSIBLE_HOST_KEY_CHECKING=False
 
 ansible-playbook \
-    --become \
-    --user osboxes \
-    --become-method sudo \
-    --become-user root \
     -i "$DIR"/puppet-agent-install-ansible-hosts.txt \
-    "$DIR"/puppet-agent-install-ansible-playbook.yaml
+    "$DIR"/puppet-agent-install-ansible-playbook.yaml \
+    --limit testing
