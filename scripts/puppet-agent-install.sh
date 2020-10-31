@@ -6,6 +6,17 @@ PUPPET_FACTSDIR=/opt/puppetlabs/facter/facts.d
 PUPPET_BINDIR=/opt/puppetlabs/bin
 PUPPET_CONFDIR=/etc/puppetlabs/puppet
 
+if [[ $# -eq 0 ]] ; then
+    echo """
+options:
+--role \$ROLE
+--env \$ENV
+--server \$SERVER
+--confirm
+"""
+    exit 0
+fi
+
 while [ $# -gt 0 ]; do
   case "$1" in
     --role)
