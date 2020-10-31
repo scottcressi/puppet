@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if ! command -v ansible ; then echo ansible is not installed ;  exit 0 ; fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
