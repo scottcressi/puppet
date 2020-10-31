@@ -9,7 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_version = "1905.1"
   config.vm.network "private_network", type: "dhcp"
   config.vm.provider "virtualbox" do |v|
-    v.memory = 4096
-    v.cpus = 4
+    v.memory = 2048
+    v.cpus = 2
   end
 end
