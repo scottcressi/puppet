@@ -1,5 +1,5 @@
 ---
-- hosts: server
+- hosts: all
   tasks:
     - name: install puppet
       raw: |
@@ -9,17 +9,17 @@
       copy:
         dest: "/opt/puppetlabs/facter/facts.d/facts.txt"
         content: |
-          puppetserver={{ hostvars[groups['server'][0]].puppet_server }}
-          environment={{ hostvars[groups['server'][0]].puppet_environment }}
-          role={{ hostvars[groups['server'][0]].puppet_role }}
+          puppetserver={{ hostvars[groups['testing'][0]].puppet_server }}
+          environment={{ hostvars[groups['testing'][0]].puppet_environment }}
+          role={{ hostvars[groups['testing'][0]].puppet_role }}
     - name: puppet.conf
       copy:
         dest: "/etc/puppetlabs/puppet/puppet.conf"
         content: |
           [agent]
-          server      = {{ hostvars[groups['server'][0]].puppet_server }}
-          environment = {{ hostvars[groups['server'][0]].puppet_environment }}
-          certname    = {{ hostvars[groups['server'][0]].puppet_role }}-{{ lookup('password', '/dev/null chars=ascii_lowercase, length=16') }}
+          server      = {{ hostvars[groups['testing'][0]].puppet_server }}
+          environment = {{ hostvars[groups['testing'][0]].puppet_environment }}
+          certname    = {{ hostvars[groups['testing'][0]].puppet_role }}-{{ lookup('password', '/dev/null chars=ascii_lowercase, length=16') }}
           runinterval = 30m
     - name: run puppet
       raw: |
