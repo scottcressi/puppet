@@ -1,7 +1,7 @@
 ---
 - hosts: server
   tasks:
-    - name: Install packages
+    - name: install puppet
       raw: |
           yum install -y https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm
           yum install -y puppet-agent-6.19.1
@@ -9,15 +9,18 @@
       copy:
         dest: "/opt/puppetlabs/facter/facts.d/facts.txt"
         content: |
-          puppetserver=someserver
-          environment=someenv
-          role=somerole
+          puppetserver={{ hostvars[groups['server'][0]].puppet_server }}
+          environment={{ hostvars[groups['server'][0]].puppet_environment }}
+          role={{ hostvars[groups['server'][0]].puppet_role }}
     - name: puppet.conf
       copy:
         dest: "/etc/puppetlabs/puppet/puppet.conf"
         content: |
           [agent]
-          server      = someserver
-          environment = someenv
-          certname    = somerole-$(head /dev/urandom | tr -dc a-z0-9 | head -c 13 ; echo '')
+          server      = {{ hostvars[groups['server'][0]].puppet_server }}
+          environment = {{ hostvars[groups['server'][0]].puppet_environment }}
+          certname    = {{ hostvars[groups['server'][0]].puppet_role }}-{{ lookup('password', '/dev/null chars=ascii_lowercase, length=16') }}
           runinterval = 30m
+    - name: run puppet
+      raw: |
+          /opt/puppetlabs/bin/puppet agent -t
