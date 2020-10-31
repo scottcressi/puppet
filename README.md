@@ -24,14 +24,14 @@ puppet agent -t --environment $ENV
 bash scripts/check.sh
 ```
 
-# installing agent on server (optional)
-1. run agent install script
+# installing agent on servers (optional)
+1. edit scripts/puppet-agent-install-ansible-hosts.txt
 ```
-bash <(curl -s https://raw.githubusercontent.com/scottcressi/puppet/master/scripts/puppet-agent-install.sh) somerole someenv someserver
+vi scripts/puppet-agent-install-ansible-hosts.txt
 ```
-2. run agent install script with confirm to apply
+2. run agent install script
 ```
-bash <(curl -s https://raw.githubusercontent.com/scottcressi/puppet/master/scripts/puppet-agent-install.sh) somerole someenv someserver confirm
+scripts/puppet-agent-install-ansible-run.sh
 ```
 
 # TODO:
