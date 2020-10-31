@@ -25,13 +25,13 @@ bash scripts/check.sh
 ```
 
 # installing agent on servers (optional)
-1. edit scripts/puppet-agent-install-ansible-hosts.txt
+1. edit scripts/ansible-hosts.txt
 ```
-vi scripts/puppet-agent-install-ansible-hosts.txt
+vi scripts/ansible-hosts.txt
 ```
 2. run agent install script
 ```
-scripts/puppet-agent-install-ansible-run.sh
+scripts/puppet-agent-install.sh
 ```
 
 # TODO:
