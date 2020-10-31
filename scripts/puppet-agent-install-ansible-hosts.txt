@@ -1,2 +1,26 @@
-[server]
-192.168.1.11    puppet_role=somerole    puppet_environment=someenv  puppet_server=someserver
+[dev]
+192.168.1.11 puppet_role=somerole puppet_environment=someenv puppet_server=someserver
+
+[servers:children]
+dev
+
+[servers:vars]
+ansible_port=22
+ansible_become=true
+ansible_become_method=sudo
+ansible_become_user=root
+ansible_user=centos
+
+[vagrant]
+127.0.0.1 puppet_role=somerole puppet_environment=someenv puppet_server=someserver
+
+[testing:children]
+vagrant
+
+[testing:vars]
+ansible_port=2222
+ansible_become=true
+ansible_become_method=sudo
+ansible_become_user=root
+ansible_user=vagrant
+ansible_ssh_private_key_file=/home/debian/repos/personal/puppet/scripts/.vagrant/machines/default/virtualbox/private_key
