@@ -1,2 +1,2 @@
 [server]
-192.168.1.2
+192.168.1.11 puppet_role=somerole puppet_environment=someenv puppet_server=someserver
