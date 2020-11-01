@@ -12,7 +12,7 @@ ansible_become_user=root
 ansible_user=centos
 
 [vagrant]
-127.0.0.1 puppet_role=somerole puppet_environment=someenv puppet_server=someserver
+127.0.0.1 puppet_role=somerole puppet_environment=master puppet_server=puppet
 
 [testing:children]
 vagrant
