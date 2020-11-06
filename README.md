@@ -9,9 +9,9 @@ bash scripts/puppet-server-install.sh
 ```
 vi scripts/facts.txt
 ```
-2. run puppet agent container
+2. run puppet agent test script
 ```
-bash scripts/puppet-agent-test.sh test
+bash scripts/puppet-agent-test.sh --client-test
 ```
 3. run puppet agent
 ```
@@ -31,7 +31,7 @@ vi scripts/ansible-hosts.txt
 ```
 2. run agent install script
 ```
-scripts/puppet-agent-install.sh
+scripts/puppet-agent-install.sh $HOSTGROUP
 ```
 
 # TODO:
