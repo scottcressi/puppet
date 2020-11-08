@@ -13,7 +13,7 @@ resource_tree::collections:
     package:
       telegraf:
         ensure: installed
-        source: https://dl.influxdata.com/telegraf/releases/telegraf-1.16.0-1.x86_64.rpm
+        source: https://dl.influxdata.com/telegraf/releases/telegraf-1.16.1-1.x86_64.rpm
       lm_sensors:
         ensure: installed
       hddtemp:
