@@ -14,6 +14,5 @@ mod        'resource_tree',         :git  =>  'https://github.com/jake-dog/puppe
 mod        'selinux',               :git  =>  'https://github.com/voxpupuli/puppet-selinux',                  :ref  =>  'v3.2.0'
 mod        'ssh',                   :git  =>  'https://github.com/saz/puppet-ssh',                            :ref  =>  'v6.2.0'
 mod        'stdlib',                :git  =>  'https://github.com/puppetlabs/puppetlabs-stdlib',              :ref  =>  'v6.5.0'
-mod        'sudo',                  :git  =>  'https://github.com/saz/puppet-sudo',                           :ref  =>  'v6.0.0'
 mod        'translate',             :git  =>  'https://github.com/puppetlabs/puppetlabs-translate',           :ref  =>  '1.2.0'
 mod        'yumrepo_core',          :git  =>  'https://github.com/puppetlabs/puppetlabs-yumrepo_core',        :ref  =>  '1.0.7'
