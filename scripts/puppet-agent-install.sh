@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ -z "$1" ] ; then echo "enter host group: testing | dev | etc" && exit 1 ; fi
+if [ -z "$1" ] ; then echo "enter host group: vagrant | dev | etc" && exit 1 ; fi
 if ! command -v ansible ; then echo ansible is not installed ;  exit 0 ; fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"

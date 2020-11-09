@@ -14,10 +14,10 @@ ansible_user=centos
 [vagrant]
 127.0.0.1 puppet_role=somerole puppet_environment=master puppet_server=puppet
 
-[testing:children]
+[vagrant:children]
 vagrant
 
-[testing:vars]
+[vagrant:vars]
 ansible_port=2222
 ansible_become=true
 ansible_become_method=sudo
