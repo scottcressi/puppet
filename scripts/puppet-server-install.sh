@@ -1,4 +1,4 @@
-#!/usr/local/env bash
+#!/usr/local/env sh
 
 pupperware_dir=/var/tmp
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
@@ -8,8 +8,8 @@ if ! command -v docker-compose ; then echo docker-compose is not installed ;  ex
 if ! command -v docker ; then echo docker is not installed ;  exit 0 ; fi
 if ! command -v git ; then echo git is not installed ;  exit 0 ; fi
 if ! command -v r10k ; then echo r10k is not installed ;  exit 0 ; fi
-[[ ! "$(systemctl is-active docker)" == "active" ]] && echo Please start docker && exit 0
-[[ ! -d $pupperware_dir/pupperware ]] && git clone https://github.com/puppetlabs/pupperware.git $pupperware_dir/pupperware
+[ ! "$(systemctl is-active docker)" = "active" ] && echo Please start docker && exit 0
+[ ! -d $pupperware_dir/pupperware ] && git clone https://github.com/puppetlabs/pupperware.git $pupperware_dir/pupperware
 
 # exports
 #export DNS_ALT_NAMES=foo

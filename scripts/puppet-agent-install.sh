@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 if [ -z "$1" ] ; then echo "enter host group: vagrant | dev | etc" && exit 1 ; fi
 if ! command -v ansible ; then echo ansible is not installed ;  exit 0 ; fi

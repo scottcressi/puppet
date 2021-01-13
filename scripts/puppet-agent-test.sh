@@ -1,8 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 if ! command -v docker ; then echo docker is not installed ;  exit 0 ; fi
 
-if [[ $# -eq 0 ]] ; then
+if [ $# -eq 0 ] ; then
     echo """
 options:
 --client-test
