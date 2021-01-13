@@ -7,7 +7,6 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 if ! command -v docker-compose ; then echo docker-compose is not installed ;  exit 0 ; fi
 if ! command -v docker ; then echo docker is not installed ;  exit 0 ; fi
 if ! command -v git ; then echo git is not installed ;  exit 0 ; fi
-if ! command -v r10k ; then echo r10k is not installed ;  exit 0 ; fi
 [ ! "$(systemctl is-active docker)" = "active" ] && echo Please start docker && exit 0
 [ ! -d $pupperware_dir/pupperware ] && git clone https://github.com/puppetlabs/pupperware.git $pupperware_dir/pupperware
 
@@ -22,4 +21,9 @@ docker-compose -f $pupperware_dir/pupperware/docker-compose.yml up -d
 docker-compose -f "$DIR"/docker/docker-compose.yml up -d
 
 # run r10k
-cd "$DIR"/../ && sudo r10k deploy environment -c r10k.yaml --puppetfile --verbose --cachedir /var/tmp/r10k_cache
+docker exec -ti pupperware_puppet_1 sh -c "apt-get update ; apt-get install -y openssh-client"
+docker exec -ti pupperware_puppet_1 sh -c "mkdir -p ~/.ssh ; chmod 400 ~/.ssh"
+docker exec -ti pupperware_puppet_1 sh -c "echo StrictHostKeyChecking no > ~/.ssh/config"
+docker cp ~/.ssh/id_rsa pupperware_puppet_1:/root/.ssh/id_rsa
+docker cp "$DIR"/../r10k.yaml pupperware_puppet_1:/var/tmp/r10k.yaml
+docker exec -ti pupperware_puppet_1 sh -c "r10k deploy environment -c /var/tmp/r10k.yaml --puppetfile --verbose --cachedir /var/tmp/r10k_cache"
