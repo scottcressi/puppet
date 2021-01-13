@@ -4,7 +4,7 @@
     - name: install puppet
       raw: |
           yum install -y https://yum.puppet.com/puppet6/puppet-release-el-7.noarch.rpm
-          yum install -y puppet-agent-6.19.1
+          yum install -y puppet-agent
     - name: facts.txt
       copy:
         dest: "/opt/puppetlabs/facter/facts.d/facts.txt"
