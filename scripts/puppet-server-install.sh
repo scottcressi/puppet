@@ -18,8 +18,8 @@ export PUPPETDB_VERSION=6.12.0
 export PUPPETSERVER_VERSION=6.14.0
 
 # start puppet
-cd $pupperware_dir/pupperware && docker-compose up -d
-cd "$DIR"/docker && docker-compose up -d
+docker-compose -f $pupperware_dir/pupperware/docker-compose.yml up -d
+docker-compose -f "$DIR"/docker/docker-compose.yml up -d
 
 # run r10k
 cd "$DIR"/../ && sudo r10k deploy environment -c r10k.yaml --puppetfile --verbose --cachedir /var/tmp/r10k_cache
