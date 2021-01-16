@@ -7,18 +7,6 @@ services:
     ports:
       - 8000:8000
 
-  webserver:
-    image: python:2
-    entrypoint:
-      - python
-      - -m
-      - SimpleHTTPServer
-    volumes:
-      - ../:/usr/src/myapp
-    working_dir: /usr/src/myapp
-    ports:
-      - 80:8000
-
 networks:
   default:
     external:

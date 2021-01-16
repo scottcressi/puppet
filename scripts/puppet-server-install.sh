@@ -21,9 +21,11 @@ docker-compose -f $pupperware_dir/pupperware/docker-compose.yml up -d
 docker-compose -f "$DIR"/docker/docker-compose.yml up -d
 
 # run r10k
-docker exec -ti pupperware_puppet_1 sh -c "apt-get update ; apt-get install -y openssh-client"
-docker exec -ti pupperware_puppet_1 sh -c "mkdir -p ~/.ssh ; chmod 400 ~/.ssh"
-docker exec -ti pupperware_puppet_1 sh -c "echo StrictHostKeyChecking no > ~/.ssh/config"
+docker exec -ti pupperware_puppet_1 sh -c " \
+                                            if ! command -v ssh > /dev/null; then apt-get update && apt-get install -y openssh-client ; fi ;\
+                                            mkdir -p ~/.ssh ; chmod 400 ~/.ssh ;\
+                                            echo StrictHostKeyChecking no > ~/.ssh/config ;\
+                                            "
 docker cp ~/.ssh/id_rsa pupperware_puppet_1:/root/.ssh/id_rsa
 docker cp "$DIR"/../r10k.yaml pupperware_puppet_1:/var/tmp/r10k.yaml
 docker exec -ti pupperware_puppet_1 sh -c "r10k deploy environment -c /var/tmp/r10k.yaml --puppetfile --verbose --cachedir /var/tmp/r10k_cache"
