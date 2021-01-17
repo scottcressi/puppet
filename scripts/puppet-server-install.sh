@@ -4,9 +4,9 @@ pupperware_dir=/var/tmp
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # checks
-if ! command -v docker-compose ; then echo docker-compose is not installed ;  exit 0 ; fi
-if ! command -v docker ; then echo docker is not installed ;  exit 0 ; fi
-if ! command -v git ; then echo git is not installed ;  exit 0 ; fi
+if ! command -v docker-compose > /dev/null ; then echo docker-compose is not installed ;  exit 0 ; fi
+if ! command -v docker > /dev/null ; then echo docker is not installed ;  exit 0 ; fi
+if ! command -v git > /dev/null ; then echo git is not installed ;  exit 0 ; fi
 [ ! "$(systemctl is-active docker)" = "active" ] && echo Please start docker && exit 0
 [ ! -d $pupperware_dir/pupperware ] && git clone https://github.com/puppetlabs/pupperware.git $pupperware_dir/pupperware
 
