@@ -13,8 +13,8 @@ if ! command -v git > /dev/null ; then echo git is not installed ;  exit 0 ; fi
 # exports
 #export DNS_ALT_NAMES=foo
 export PUPPERWARE_ANALYTICS_ENABLED=false
-export PUPPETDB_VERSION=6.12.0
-export PUPPETSERVER_VERSION=6.14.0
+export PUPPETDB_VERSION=7.1.0
+export PUPPETSERVER_VERSION=7.0.3
 
 # start puppet
 docker-compose -f $pupperware_dir/pupperware/docker-compose.yml up -d
