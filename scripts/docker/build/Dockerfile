@@ -1,5 +1,5 @@
 FROM centos/systemd
-RUN yum install -y https://yum.puppet.com/puppet6/puppet6-release-el-7.noarch.rpm
+RUN yum install -y https://yum.puppetlabs.com/puppet-release-el-7.noarch.rpm
 RUN yum install -y puppet-agent \
                     less \
                     rsyslog
