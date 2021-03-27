@@ -2,20 +2,22 @@
 
 export PUPPETDB_VERSION=7.1.0
 export PUPPETSERVER_VERSION=7.1.0
+export PUPPERWARE_ANALYTICS_ENABLED=false
+#export DNS_ALT_NAMES=foo
 
 pupperware_dir=/var/tmp
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# checks
+# check binaries
 if ! command -v docker-compose > /dev/null ; then echo docker-compose is not installed ;  exit 0 ; fi
 if ! command -v docker > /dev/null ; then echo docker is not installed ;  exit 0 ; fi
 if ! command -v git > /dev/null ; then echo git is not installed ;  exit 0 ; fi
-[ ! "$(systemctl is-active docker)" = "active" ] && echo Please start docker && exit 0
-[ ! -d $pupperware_dir/pupperware ] && git clone https://github.com/puppetlabs/pupperware.git $pupperware_dir/pupperware
 
-# exports
-#export DNS_ALT_NAMES=foo
-export PUPPERWARE_ANALYTICS_ENABLED=false
+# check docker service
+[ ! "$(systemctl is-active docker)" = "active" ] && echo Please start docker && exit 0
+
+# check pupperware repo
+[ ! -d $pupperware_dir/pupperware ] && git clone https://github.com/puppetlabs/pupperware.git $pupperware_dir/pupperware
 
 # start puppet
 docker-compose -f $pupperware_dir/pupperware/docker-compose.yml up -d
