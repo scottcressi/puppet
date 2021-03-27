@@ -32,6 +32,7 @@ docker exec -ti pupperware_puppet_1 sh -c " \
 docker cp ~/.ssh/id_rsa pupperware_puppet_1:/root/.ssh/id_rsa
 docker cp "$DIR"/../r10k.yaml pupperware_puppet_1:/var/tmp/r10k.yaml
 docker exec -ti pupperware_puppet_1 sh -c "r10k deploy environment -c /var/tmp/r10k.yaml --puppetfile --verbose --cachedir /var/tmp/r10k_cache"
+docker exec -ti pupperware_puppet_1 sh -c "mkdir -p /etc/puppetlabs/code/environments/production"
 
 # eyaml create keys
 eyaml_check=$(aws secretsmanager list-secrets --region us-east-1 --query SecretList[*].Name | grep -c eyaml)
