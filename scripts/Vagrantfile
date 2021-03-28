@@ -7,9 +7,14 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "centos/7"
   config.vm.box_version = "2004.01"
-  config.vm.network "private_network", type: "dhcp"
+  config.vm.network "public_network", type: "dhcp"
   config.vm.provider "virtualbox" do |v|
     v.memory = 1024
     v.cpus = 1
   end
+  config.vm.provision "shell",
+    inline: """
+    yum install -y https://yum.puppetlabs.com/puppet-release-el-7.noarch.rpm
+    yum install -y puppet-agent
+    """
 end

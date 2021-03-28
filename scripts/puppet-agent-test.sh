@@ -5,7 +5,8 @@ if ! command -v docker ; then echo docker is not installed ;  exit 0 ; fi
 if [ $# -eq 0 ] ; then
     echo """
 options:
---client-test
+--client-test-docker
+--client-test-vagrant
 --client-destroy
 --cert-list
 --cert-clean \$SOMECERT
@@ -13,7 +14,7 @@ options:
     exit 0
 fi
 
-client-test(){
+client-test-docker(){
     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
     UUID="$(head /dev/urandom | tr -dc a-z0-9 | head -c 13 ; echo '')"
     NAME=test-puppet-agent-$UUID
@@ -28,10 +29,21 @@ client-test(){
     docker exec -ti "$NAME" /bin/bash
 }
 
+client-test-vagrant(){
+    IP=$(ip route get 8.8.8.8 | head -1 | awk '{print $7}')
+    echo "$IP"
+    vagrant up --provision
+    vagrant ssh -c "echo $IP puppet | sudo tee -a /etc/hosts"
+    vagrant ssh -c "sudo /opt/puppetlabs/bin/puppet agent -t"
+}
+
 while [ $# -gt 0 ]; do
   case "$1" in
-    --client-test)
-        client-test
+    --client-test-docker)
+        client-test-docker
+      ;;
+    --client-test-vagrant)
+        client-test-vagrant
       ;;
     --client-destroy)
         docker ps | awk '/test-puppet-agent/ {print $1}' | xargs docker kill
