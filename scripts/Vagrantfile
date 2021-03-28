@@ -17,4 +17,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     yum install -y https://yum.puppetlabs.com/puppet-release-el-7.noarch.rpm
     yum install -y puppet-agent
     """
+  config.vm.provision "file", source: "facts.txt", destination: "/opt/puppetlabs/facter/facts.d/facts.txt"
 end
