@@ -5,7 +5,7 @@ version: '3.7'
 services:
 
   puppetboard:
-    image: camptocamp/puppetboard:latest
+    image: camptocamp/puppetboard:0.3.0
     ports:
       - 8000:80
 
