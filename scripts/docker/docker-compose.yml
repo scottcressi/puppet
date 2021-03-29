@@ -1,11 +1,13 @@
 version: '3.7'
 
+# WARNING: PUPPET AGENT MUST CHECK IN AT LEAST ONCE FOR THIS TO WORK
+
 services:
 
   puppetboard:
-    image: puppet/puppetboard:0.3.0
+    image: camptocamp/puppetboard:latest
     ports:
-      - 8000:8000
+      - 8000:80
 
 networks:
   default:
