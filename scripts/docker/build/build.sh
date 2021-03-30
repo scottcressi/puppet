@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-docker build --tag centos/systemd-puppet .
+docker build --tag puppet-test-client .
