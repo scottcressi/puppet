@@ -32,6 +32,7 @@ client-test-metal(){
     vagrant up --provision --provider="$PROVIDER"
     vagrant ssh -c "echo $IP puppet | sudo tee -a /etc/hosts"
     vagrant ssh -c "sudo /opt/puppetlabs/bin/puppet agent -t"
+    vagrant ssh -c "sudo /opt/puppetlabs/bin/puppet agent -t --noop --environment master"
 }
 
 while [ $# -gt 0 ]; do
