@@ -1,6 +1,6 @@
 #!/usr/local/env sh
 
-export PUPPETDB_VERSION=7.1.0
+export PUPPETDB_VERSION=7.2.0
 export PUPPETSERVER_VERSION=7.1.0
 export PUPPERWARE_ANALYTICS_ENABLED=false
 pupperware_dir=/var/tmp
