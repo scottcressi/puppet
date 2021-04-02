@@ -13,7 +13,7 @@ resource_tree::collections:
     package:
       telegraf:
         ensure: installed
-        source: https://dl.influxdata.com/telegraf/releases/telegraf-1.16.1-1.x86_64.rpm
+        source: https://dl.influxdata.com/telegraf/releases/telegraf-1.18.0-1.x86_64.rpm
       lm_sensors:
         ensure: installed
       hddtemp:
@@ -79,9 +79,9 @@ company: 'example'
 influxdb: 'influxdb'
 
 # puppet agent
-puppet_agent::package_version: '6.19.1'
+puppet_agent::package_version: '7.5.0'
 puppet_agent::service_names: []
-puppet_agent::collection: 'puppet6'
+puppet_agent::collection: 'puppet7'
 
 # SSH
 ssh::server_options:
@@ -101,5 +101,5 @@ filebeat::outputs:
 filebeat::logging:
   level: warning
 filebeat::major_version: '7'
-filebeat::package_ensure: '7.9.3'
+filebeat::package_ensure: '7.12.0'
 filebeat::service_provider: 'systemd'
