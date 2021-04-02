@@ -9,6 +9,9 @@ services:
     ports:
       - 8000:80
 
+  puppet-agent:
+    image: puppet/puppet-agent-alpine:7.5.0
+
 networks:
   default:
     external:
