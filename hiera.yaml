@@ -16,3 +16,15 @@ hierarchy:
     options:
       pkcs7_private_key: /etc/puppetlabs/puppet/keys/private_key.pkcs7.pem
       pkcs7_public_key:  /etc/puppetlabs/puppet/keys/public_key.pkcs7.pem
+
+  - name: "Hiera-AWS-SM lookup"
+    lookup_key: hiera_aws_sm
+    options:
+      continue_if_not_found: true
+      aws_access_key: SOMEACCESSKEY
+      aws_secret_key: SOMESECRETKEY
+      region: us-east-1
+      prefixes:
+        - puppet/
+      confine_to_keys:
+        - '^aws_.*'
