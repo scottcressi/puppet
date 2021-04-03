@@ -16,7 +16,6 @@ check(){
 
 puppet_start(){
     docker-compose -f $pupperware_dir/pupperware/docker-compose.yml up -d
-    docker-compose -f "$DIR"/docker/docker-compose.yml up -d
 }
 
 r10k_run(){
@@ -62,9 +61,14 @@ eyaml_keys_copy(){
     rm -f public_key.pkcs7.pem
 }
 
+misc_start(){
+    docker-compose -f "$DIR"/docker/docker-compose.yml up -d
+}
+
 check
 puppet_start
 r10k_run
 eyaml_keys_create
 eyaml_keys_download
 eyaml_keys_copy
+misc_start
