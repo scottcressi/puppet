@@ -18,7 +18,7 @@ client-test-docker(){
     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
     UUID="$(head /dev/urandom | tr -dc a-z0-9 | head -c 13 ; echo '')"
     NAME=test-puppet-agent-$UUID
-    cd "$DIR"/docker/build && docker build --tag puppet-test-client .
+    cd "$DIR"/docker/client && docker build --tag puppet-test-client .
     docker run \
         -ti \
         --net pupperware_default \
