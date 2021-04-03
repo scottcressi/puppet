@@ -1,25 +1,26 @@
 # server install
-1. run bootstrap
 ```
 bash scripts/puppet-server-install.sh
 ```
 
-# testing (optional)
-1. edit scripts/facts.txt
+# change facts when testing
 ```
-vi scripts/facts.txt
+export FACTER_$foo=bar
 ```
-2. run puppet agent test script
+
+# testing with vagrant (optional)
 ```
-bash scripts/puppet-agent-test.sh --client-test
+bash scripts/puppet-agent-test.sh --client-test-metal
+puppet agent -t --environment $ENV
 ```
-3. run puppet agent
+
+# testing with docker (optional)
 ```
+bash scripts/puppet-agent-test.sh --client-test-docker
 puppet agent -t --environment $ENV
 ```
 
 # syntax checking (optional)
-1. run check script
 ```
 bash scripts/check.sh
 ```
@@ -32,9 +33,4 @@ vi scripts/ansible-hosts.txt
 2. run agent install script
 ```
 scripts/puppet-agent-install.sh $HOSTGROUP
-```
-
-# TODO:
-```
-implement vault for secrets
 ```
