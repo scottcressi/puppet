@@ -14,7 +14,13 @@ check(){
     [ ! -d $pupperware_dir/pupperware ] && git clone https://github.com/puppetlabs/pupperware.git $pupperware_dir/pupperware
 }
 
-puppet_start(){
+puppetserver_build(){
+    if [ "$(docker image ls | grep -c puppetserver-custom)" = 0 ] ; then
+        cd "$DIR"/docker/master && docker build --tag puppetserver-custom .
+    fi
+}
+
+puppetserver_start(){
     docker-compose -f $pupperware_dir/pupperware/docker-compose.yml up -d
 }
 
@@ -66,7 +72,8 @@ misc_start(){
 }
 
 check
-puppet_start
+puppetserver_build
+puppetserver_start
 r10k_run
 eyaml_keys_create
 eyaml_keys_download
