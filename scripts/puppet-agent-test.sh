@@ -28,11 +28,7 @@ client-test-docker(){
 }
 
 client-test-metal(){
-    IP=$(ip route get 8.8.8.8 | head -1 | awk '{print $7}')
     vagrant up --provision --provider="$PROVIDER"
-    vagrant ssh -c "echo $IP puppet | sudo tee -a /etc/hosts"
-    vagrant ssh -c "sudo /opt/puppetlabs/bin/puppet agent -t"
-    vagrant ssh -c "sudo /opt/puppetlabs/bin/puppet agent -t --noop --environment master"
 }
 
 while [ $# -gt 0 ]; do
@@ -43,9 +39,11 @@ while [ $# -gt 0 ]; do
     --client-test-metal)
         echo NOTE: when using libvirt provider you must add the user that is running vagrant to the libvirt group
         echo NOTE: to remove a previous conflicting virtualbox network run: VBoxManage hostonlyif remove vboxnetX
-        echo NOTE: to install libvirt provider run: vagrant plugin install vagrant-libvirt
-        echo NOTE: to remove duplicate domain run: sudo virsh undefine $DOMAIN
+        echo NOTE: to remove duplicate domain run: sudo virsh undefine "$DOMAIN"
+        echo NOTE: you must have the following entry in your host systems /etc/hosts: \$YOUR_HOST_IP puppet
         echo
+        if [ "$(vagrant plugin list | grep -c vagrant-dns)" = 0 ] ; then echo please run: vagrant plugin install vagrant-dns ; fi
+        if [ "$(vagrant plugin list | grep -c vagrant-libvirt)" = 0 ] ; then echo please run: vagrant plugin install vagrant-libvirt ; fi
         [ -z "$2" ] && echo virtualbox / libvirt required && exit 0
         PROVIDER=$2
         client-test-metal

@@ -11,6 +11,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider "virtualbox" do |v|
     v.memory = 1024
     v.cpus = 1
+    v.customize [
+      "modifyvm", :id,
+      "--natdnshostresolver1", "on",
+    ]
   end
   config.vm.provider "libvirt" do |v|
     v.memory = 1024
@@ -20,5 +24,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     inline: """
     yum install -y https://yum.puppetlabs.com/puppet-release-el-7.noarch.rpm
     yum install -y puppet-agent
+    /opt/puppetlabs/bin/puppet agent -t --noop --environment master
     """
 end
