@@ -26,7 +26,6 @@ puppetserver_start(){
 
 r10k_run(){
     docker exec -ti pupperware_puppet_1 sh -c " \
-                                                if ! command -v ssh > /dev/null; then apt-get update && apt-get install -y openssh-client vim ; fi ;\
                                                 mkdir -p ~/.ssh ; chmod 400 ~/.ssh ;\
                                                 echo StrictHostKeyChecking no > ~/.ssh/config ;\
                                                 "
