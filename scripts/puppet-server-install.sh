@@ -16,15 +16,18 @@ check(){
 
 puppetserver_build(){
     if [ "$(docker image ls | grep -c puppetserver-custom)" = 0 ] ; then
+        echo ; echo building puppetserver image ; echo
         cd "$DIR"/docker/master && docker build --tag puppetserver-custom .
     fi
 }
 
 puppetserver_start(){
+    echo ; echo starting puppetserver ; echo
     docker-compose -f $pupperware_dir/pupperware/docker-compose.yml up -d
 }
 
 r10k_run(){
+    echo ; echo running r10k ; echo
     docker exec -ti pupperware_puppet_1 sh -c " \
                                                 mkdir -p ~/.ssh ; chmod 400 ~/.ssh ;\
                                                 echo StrictHostKeyChecking no > ~/.ssh/config ;\
@@ -38,27 +41,19 @@ r10k_run(){
 eyaml_keys_create(){
     eyaml_check=$(aws secretsmanager list-secrets --region us-east-1 --query SecretList[*].Name | grep -c eyaml)
     if [ "$eyaml_check" != "2" ] ; then
-        echo "eyaml keys do not exist in aws secret manager"
-        if [ ! -d keys ] ; then
-            echo "local eyaml keys do not exist, creating"
-            eyaml createkeys
-            echo uploading keys to aws secret manager
-            aws secretsmanager  create-secret --name eyaml-privatekey --region us-east-1
-            aws secretsmanager  create-secret --name eyaml-publickey --region us-east-1
-            aws secretsmanager put-secret-value --secret-id eyaml-privatekey --region us-east-1 --secret-string "$(cat keys/private_key.pkcs7.pem)"
-            aws secretsmanager put-secret-value --secret-id eyaml-publickey --region us-east-1 --secret-string "$(cat keys/public_key.pkcs7.pem)"
-        fi
-    else
-        echo eyaml keys exist in aws secret manager, skipping creation
+        echo ; echo "eyaml keys do not exist in aws secret manager", please create eyaml-privatekey and eyaml-publickey and run again
+        exit 0
     fi
 }
 
 eyaml_keys_download(){
+    echo ; echo eyaml download ; echo
     aws secretsmanager get-secret-value --secret-id eyaml-publickey --region  us-east-1 --query SecretString --output text > public_key.pkcs7.pem
     aws secretsmanager get-secret-value --secret-id eyaml-privatekey --region  us-east-1 --query SecretString --output text > private_key.pkcs7.pem
 }
 
 eyaml_keys_copy(){
+    echo ; echo eyaml copy ; echo
     docker exec -ti pupperware_puppet_1 sh -c "mkdir -p /etc/puppetlabs/puppet/keys"
     docker cp private_key.pkcs7.pem pupperware_puppet_1:/etc/puppetlabs/puppet/keys/private_key.pkcs7.pem
     docker cp public_key.pkcs7.pem pupperware_puppet_1:/etc/puppetlabs/puppet/keys/public_key.pkcs7.pem
@@ -67,6 +62,7 @@ eyaml_keys_copy(){
 }
 
 misc_start(){
+    echo ; echo misc start ; echo
     docker-compose -f "$DIR"/docker/docker-compose.yml up -d
 }
 
