@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 
 # WARNING: PUPPET AGENT MUST CHECK IN AT LEAST ONCE FOR THIS TO WORK
 
