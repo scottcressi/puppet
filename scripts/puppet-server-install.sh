@@ -89,8 +89,8 @@ puppetserver_build
 puppetserver_start
 check_puppetserver_health
 check_puppetserver_ca_health
-r10k_run
 misc_start
+r10k_run
 #eyaml_keys_create
 #eyaml_keys_download
 #eyaml_keys_copy
