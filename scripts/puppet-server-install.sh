@@ -66,11 +66,31 @@ misc_start(){
     docker-compose -f "$DIR"/docker/docker-compose.yml up -d
 }
 
+check_puppetserver_health(){
+    echo
+    while ! nc -z localhost 8140; do
+        echo Waiting for puppetserver to launch on 8140...
+        sleep 1
+    done
+    echo "puppetserver launched"
+}
+
+check_puppetserver_ca_health(){
+    echo
+    while [ "$(docker exec -ti pupperware_puppet_1 puppetserver ca list --all > /dev/null ; echo $?)" -ne 0 ] ; do
+        echo Waiting for puppetserver ca to launch...
+        sleep 5
+    done
+    echo "puppetserver ca launched"
+}
+
 check
 puppetserver_build
 puppetserver_start
+check_puppetserver_health
+check_puppetserver_ca_health
 r10k_run
-eyaml_keys_create
-eyaml_keys_download
-eyaml_keys_copy
 misc_start
+#eyaml_keys_create
+#eyaml_keys_download
+#eyaml_keys_copy
