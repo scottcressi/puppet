@@ -23,7 +23,6 @@ client-test-docker(){
         -ti \
         --net pupperware_default \
         --name="$NAME" \
-        -v "$DIR"/facts.txt:/opt/puppetlabs/facter/facts.d/facts.txt \
         puppet-test-client
 }
 
