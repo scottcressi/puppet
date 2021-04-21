@@ -1,7 +1,7 @@
 #!/usr/local/env sh
 
 export PUPPETDB_VERSION=7.2.0
-export PUPPETSERVER_VERSION=7.1.0
+export PUPPETSERVER_VERSION=7.1.1
 export PUPPERWARE_ANALYTICS_ENABLED=false
 pupperware_dir=/var/tmp
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
@@ -36,6 +36,8 @@ r10k_run(){
     docker cp "$DIR"/../r10k.yaml pupperware_puppet_1:/var/tmp/r10k.yaml
     docker exec -ti pupperware_puppet_1 sh -c "r10k deploy environment -c /var/tmp/r10k.yaml --puppetfile --verbose --cachedir /var/tmp/r10k_cache"
     docker exec -ti pupperware_puppet_1 sh -c "mkdir -p /etc/puppetlabs/code/environments/production"
+    echo "* * * * * $(whoami) docker exec pupperware_puppet_1 sh -c 'r10k deploy environment -c /var/tmp/r10k.yaml --puppetfile --verbose --cachedir /var/tmp/r10k_cache'" | sudo tee /etc/cron.d/r10k > /dev/null
+
 }
 
 eyaml_keys_create(){
