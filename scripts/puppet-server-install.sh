@@ -17,7 +17,7 @@ check(){
 puppetserver_build(){
     if [ "$(docker image ls | grep -c puppetserver-custom)" = 0 ] ; then
         echo ; echo building puppetserver image ; echo
-        cd "$DIR"/docker/master && docker build --tag puppetserver-custom .
+        docker build --tag puppetserver-custom --file "$DIR"/docker/master/Dockerfile .
     fi
 }
 
