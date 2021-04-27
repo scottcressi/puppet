@@ -10,4 +10,4 @@ cd "$DIR"/../ && yamllint -s -d "{extends: default, rules: {line-length: {max: 9
 cd "$DIR"/../ && r10k puppetfile check
 cd "$DIR"/../ && r10k puppetfile install --color --verbose info --force --moduledir modules_forge
 cd "$DIR"/../ && puppet module list --modulepath modules_forge --tree
-cd "$DIR"/../ && find manifests modules -type f | grep "\.pp" | xargs puppet parser validate
+cd "$DIR"/../ && find manifests modules -type f | grep "\\.pp" | xargs puppet parser validate
