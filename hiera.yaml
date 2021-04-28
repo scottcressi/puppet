@@ -10,6 +10,8 @@ defaults:
 hierarchy:
   - name: "hierarchy"
     paths:
+      - "os/%{facts.os.name}/%{facts.os.release.major}.yaml"
+      - "os/%{facts.os.name}/common.yaml"
       - "virtual/%{facts.virtual}.yaml"
       - "common.yaml"
     lookup_key: eyaml_lookup_key
